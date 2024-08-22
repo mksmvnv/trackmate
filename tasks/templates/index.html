@@ -5,5 +5,7 @@ Tasks
 {% endblock %}
 
 {% block content %}
-<h1>Tasks</h1>
+{% for task in object_list %}
+    <p>{{ task.title }}</p>
+{% endfor %}
 {% endblock %}
