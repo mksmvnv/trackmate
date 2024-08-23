@@ -1,7 +1,10 @@
 from django.urls import path
 
-from .views import IndexView
+from .views import CreateTaskListView, UpdateTaskStatusView
 
 urlpatterns = [
-    path("", IndexView.as_view(), name="index"),
+    path("", CreateTaskListView.as_view(), name="index"),
+    path(
+        "update_status/<int:pk>/", UpdateTaskStatusView.as_view(), name="update_status"
+    ),
 ]
