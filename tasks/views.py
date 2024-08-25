@@ -1,6 +1,7 @@
+from django.urls import reverse_lazy
 from django.forms import BaseModelForm
-from django.http import HttpResponse, JsonResponse
-from django.views.generic import ListView, CreateView, UpdateView
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from .models import Task
 from .forms import TaskForm
@@ -13,7 +14,7 @@ class CreateTaskListView(CreateView, ListView):
 
     model = Task
     form_class = TaskForm
-    success_url = "/"
+    success_url = reverse_lazy("index")
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         return super().form_valid(form)
@@ -35,3 +36,29 @@ class UpdateTaskStatusView(UpdateView):
 
     def form_invalid(self, form: BaseModelForm) -> JsonResponse:
         return JsonResponse({"success": False, "errors": form.errors}, status=400)
+
+
+class UpdateTaskView(UpdateView):
+    """Update task"""
+
+    model = Task
+    form_class = TaskForm
+    template_name = "update.html"
+    success_url = reverse_lazy("index")
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form: BaseModelForm) -> HttpResponse:
+        return self.render_to_response(self.get_context_data(form=form))
+
+
+class DeleteTaskView(DeleteView):
+    """Delete task"""
+
+    model = Task
+    success_url = reverse_lazy("index")
+
+    def get(self, request, *args, **kwargs) -> HttpResponse:
+        return self.post(request, *args, **kwargs)
