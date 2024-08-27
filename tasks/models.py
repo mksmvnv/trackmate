@@ -6,7 +6,7 @@ class Task(models.Model):
     title = models.CharField(max_length=128)
     description = models.TextField(max_length=2056, null=True, blank=True)
     status = models.BooleanField(default=False)
-    сreated_at = models.DateTimeField(default=now)
+    created_at = models.DateTimeField(default=now)
 
     class Meta:
         db_table = "tasks"
@@ -14,4 +14,4 @@ class Task(models.Model):
         verbose_name_plural = "tasks"
 
     def __str__(self):
-        return f"{self.title} <{self.сreated_at.strftime('%d-%m-%Y %H:%M')}>"
+        return f"{self.title} - {self.created_at.strftime('%d-%m-%Y %H:%M')}"
