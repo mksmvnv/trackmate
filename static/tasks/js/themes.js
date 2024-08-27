@@ -1,7 +1,8 @@
 const htmlElement = document.getElementById('html-theme');
 const themeToggleBtn = document.getElementById('theme-toggle');
 const addTaskButton = document.getElementById('add-task-button');
-    
+
+
 function setTheme(theme) {
     htmlElement.setAttribute('data-bs-theme', theme);
     localStorage.setItem('theme', theme);
