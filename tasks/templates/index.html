@@ -10,7 +10,7 @@ trackmate
 <form method="post" action="{% url 'index' %}">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit" class="btn btn-dark">Добавить</button>
+  <button type="submit" class="btn btn-dark" id="add-task-button">Добавить</button>
 </form>
 <!--Tasks list-->
 <h1 class="text-center m-5">Список задач</h1>
