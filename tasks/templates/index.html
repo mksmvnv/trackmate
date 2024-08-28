@@ -5,80 +5,21 @@ trackmate
 {% endblock %}
 
 {% block content %}
-<!--Task form-->
-<h1 class="text-center m-5">Добавить задачу</h1>
-<form method="post" action="{% url 'index' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="btn btn-dark" id="add-task-button">Добавить</button>
-</form>
-<!--Tasks list-->
-<h1 class="text-center m-5">Список задач</h1>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">№</th>
-      <th scope="col">Название</th>
-      <th scope="col">Описание</th>
-      <th scope="col">Статус</th>
-      <th scope="col">Действия</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for task in page_obj %}
-    <tr>
-      <th scope="row">{{ task.id }}</th>
-      <td>{{ task.title }}</td>
-      <td>{{ task.description }}</td>
-      <td>
-        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-          <input type="checkbox" class="btn-check" id="btncheck{{ task.id }}" autocomplete="off" data-id="{{ task.id }}" {% if task.status %}checked{% endif %}>
-          <label class="btn btn-outline-success" for="btncheck{{ task.id }}"><i class="bi bi-check-lg"></i></label>
-        </div>
-      </td>
-      <td>
-        <a href="{% url 'task-update' task.id %}" class="btn btn-warning d-inline"><i class="bi bi-pencil-square"></i></a>
-        <form action="{% url 'task-delete' task.id %}" method="post" class="d-inline">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">
-                <i class="bi bi-x-lg"></i>
-            </button>
-        </form>
-    </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-<!-- Pagination controls -->
-<div class="mt-5">
-  <nav aria-label="Pagination">
-    <ul class="pagination justify-content-center">
-      {% if page_obj.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-            <span aria-hidden="true">Предыдущая</span>
-          </a>
-        </li>
-      {% endif %}
-
-      {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-          <li class="page-item active" aria-current="page">
-            <span class="page-link">{{ num }}</span>
-          </li>
-        {% else %}
-          <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-        {% endif %}
-      {% endfor %}
-
-      {% if page_obj.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-            <span aria-hidden="true">Следующая</span>
-          </a>
-        </li>
-      {% endif %}
-    </ul>
-  </nav>
+{% if user.is_authenticated %}
+<h1 class="text-center m-5">{{ user.username }}, Добро пожаловать в <code class="text-danger">trackmate</code> 👋</h1>
+<p class="text-center">С возвращением мой друг!</p>
+<div class="text-center">
+  <a href="{% url 'tasks' %}">
+    <button class="btn btn-success btn-lg m-5">Перейти к задачам</button>
+  </a>
 </div>
+{% else %}
+<h1 class="text-center m-5">Незнакомец, Добро пожаловать в <code class="text-danger">trackmate</code> 👋</h1>
+<p class="text-center">Авторизуйся и пользуйся этим прекрасным приложением!</p>
+<div class="text-center">
+  <a href="{% url 'login' %}">
+    <button class="btn btn-danger btn-lg m-5">Авторизоваться</button>
+  </a>
+</div>
+{% endif %}
 {% endblock %}
