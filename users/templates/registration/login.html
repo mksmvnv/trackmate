@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %} 
+<h1 class="text-center m-5">Авторизация</h1>
+{% if form.errors %}
+    <p>{{ form.errors.error }}</p>
+{% endif %}
+<form action="{% url 'login' %}" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Войти</button>
+</form>
+<p>Ещё нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+{% endblock %}
