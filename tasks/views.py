@@ -1,22 +1,34 @@
 from django.urls import reverse_lazy
 from django.forms import BaseModelForm
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import (
+    TemplateView,
+    ListView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 from django.core.paginator import Paginator
 from django.db.models.query import QuerySet
 
-from .models import Task
-from .forms import TaskForm
+from tasks.models import Task
+from tasks.forms import TaskForm
+
+
+class IndexView(TemplateView):
+    """Index page"""
+
+    template_name = "index.html"
 
 
 class CreateTaskListView(CreateView, ListView):
     """Add and list tasks"""
 
-    template_name = "index.html"
+    template_name = "tasks.html"
 
     model = Task
     form_class = TaskForm
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("tasks")
 
     paginate_by = 5
 
@@ -63,7 +75,7 @@ class UpdateTaskView(UpdateView):
     model = Task
     form_class = TaskForm
     template_name = "update.html"
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("tasks")
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         self.object = form.save()
@@ -77,7 +89,7 @@ class DeleteTaskView(DeleteView):
     """Delete task"""
 
     model = Task
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("tasks")
 
     def get(self, request, *args, **kwargs) -> HttpResponse:
         return self.post(request, *args, **kwargs)
