@@ -3,16 +3,21 @@ const themeToggleBtn = document.getElementById('theme-toggle');
 const addTaskButton = document.getElementById('add-task-button');
 
 
-function setTheme(theme) {
-    htmlElement.setAttribute('data-bs-theme', theme);
-    localStorage.setItem('theme', theme);
+function setTheme(themeName) {
+    htmlElement.setAttribute('data-bs-theme', themeName);
+    localStorage.setItem('theme', themeName);
 
-    if (theme === 'dark') {
-        addTaskButton.classList.remove('btn-dark');
-        addTaskButton.classList.add('btn-secondary');
+    const isTasksPage = window.location.pathname === '/tasks/';
+    const taskButton = document.getElementById('add-task-button');
+
+    if (themeName === 'dark') {
+        if (isTasksPage) {
+            taskButton.classList.replace('btn-dark', 'btn-secondary');
+        }
     } else {
-        addTaskButton.classList.remove('btn-secondary');
-        addTaskButton.classList.add('btn-dark');
+        if (isTasksPage) {
+            taskButton.classList.replace('btn-secondary', 'btn-dark');
+        }
     }
 }
 
