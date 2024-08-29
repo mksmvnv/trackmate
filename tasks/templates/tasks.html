@@ -27,7 +27,7 @@ Tasks
   <tbody>
     {% for task in page_obj %}
     <tr>
-      <th scope="row">{{ task.id }}</th>
+      <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
       <td>{{ task.title }}</td>
       <td>{{ task.description }}</td>
       <td>
