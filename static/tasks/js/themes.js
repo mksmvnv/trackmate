@@ -7,15 +7,12 @@ function setTheme(themeName) {
     htmlElement.setAttribute('data-bs-theme', themeName);
     localStorage.setItem('theme', themeName);
 
-    const isTasksPage = window.location.pathname === '/tasks/';
-    const taskButton = document.getElementById('add-task-button');
+    const taskButton = document.getElementById('task-button');
 
-    if (themeName === 'dark') {
-        if (isTasksPage) {
+    if (taskButton) {
+        if (themeName === 'dark') {
             taskButton.classList.replace('btn-dark', 'btn-secondary');
-        }
-    } else {
-        if (isTasksPage) {
+        } else if (themeName === 'light') {
             taskButton.classList.replace('btn-secondary', 'btn-dark');
         }
     }
@@ -29,4 +26,3 @@ themeToggleBtn.addEventListener('click', () => {
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
 });
-
