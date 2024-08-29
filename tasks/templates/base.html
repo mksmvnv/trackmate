@@ -56,7 +56,7 @@
   </main>
   <!--Footer-->
   <footer class="py-3 my-4">
-    <p class="text-center nav-item nav-link px-2 text-body-secondary text-decoration-none text-reset fs-6">trackmate by mksmvnv</p>
+    <p class="text-center nav-item nav-link px-2 text-body-secondary text-decoration-none text-reset fs-6">trackmate by <i>mksmvnv</i></p>
     <ul class="nav justify-content-center pb-1 mb-1">
       <li class="nav-item"><a href="https://t.me/mksm_vnv" target="_blank" class="nav-link px-2 text-body-secondary text-decoration-none text-reset fs-6"><i class="bi bi-telegram"></i></a></li>
       <li class="nav-item"><a href="https://github.com/mksmvnv" target="_blank" class="nav-link px-2 text-body-secondary text-decoration-none text-reset fs-6"><i class="bi bi-github"></i></a></li>
@@ -68,6 +68,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{% static 'tasks/js/themes.js' %}"></script>
-  <script src="{% static 'tasks/js/status.js' %}"></script>
+  {% block scripts %}{% endblock %}
   </body>
 </html>
