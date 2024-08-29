@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.forms import BaseModelForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import (
     TemplateView,
@@ -21,15 +22,14 @@ class IndexView(TemplateView):
     template_name = "index.html"
 
 
-class CreateTaskListView(CreateView, ListView):
+class CreateTaskListView(LoginRequiredMixin, CreateView, ListView):
     """Add and list tasks"""
 
     template_name = "tasks.html"
-
     model = Task
     form_class = TaskForm
+    login_url = reverse_lazy("login")
     success_url = reverse_lazy("tasks")
-
     paginate_by = 5
 
     def get_context_data(self, **kwargs) -> dict:
@@ -45,9 +45,10 @@ class CreateTaskListView(CreateView, ListView):
         return context
 
     def get_queryset(self) -> QuerySet:
-        return Task.objects.all().order_by("created_at")
+        return Task.objects.filter(user=self.request.user).order_by("created_at")
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        form.instance.user = self.request.user
         return super().form_valid(form)
 
     def form_invalid(self, form: BaseModelForm) -> HttpResponse:
