@@ -11,6 +11,7 @@ from django.views.generic import (
 )
 from django.core.paginator import Paginator
 from django.db.models.query import QuerySet
+from django.shortcuts import get_object_or_404
 
 from tasks.models import Task
 from tasks.forms import TaskForm
@@ -60,6 +61,9 @@ class UpdateTaskStatusView(UpdateView):
 
     model = Task
     fields = ["status"]
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Task, id=self.kwargs["pk"], user=self.request.user)
 
     def form_valid(self, form: BaseModelForm) -> JsonResponse:
         form.instance.status = self.request.POST.get("status") == "true"
