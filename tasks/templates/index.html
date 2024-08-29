@@ -6,7 +6,7 @@ trackmate
 
 {% block content %}
 {% if user.is_authenticated %}
-<h1 class="text-center m-5">{{ user.username }}, Добро пожаловать в <code class="text-danger">trackmate</code> 👋</h1>
+<h1 class="text-center m-5"><code class="text-danger">{{ user.username }}</code>, добро пожаловать в <code class="text-danger">trackmate</code> 👋</h1>
 <p class="text-center">С возвращением мой друг!</p>
 <div class="text-center">
   <a href="{% url 'tasks' %}">
