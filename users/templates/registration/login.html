@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Авторизация{% endblock %}
 
@@ -13,4 +14,7 @@
     <button type="submit" class="btn btn-success">Войти</button>
 </form>
 <p>Ещё нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+{% endblock %}
+
+{% block scripts %}
 {% endblock %}
