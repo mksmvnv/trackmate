@@ -56,11 +56,12 @@ class CreateTaskListView(LoginRequiredMixin, CreateView, ListView):
         return super().form_invalid(form)
 
 
-class UpdateTaskStatusView(UpdateView):
+class UpdateTaskStatusView(LoginRequiredMixin, UpdateView):
     """Update task status"""
 
     model = Task
     fields = ["status"]
+    login_url = reverse_lazy("login")
 
     def get_object(self, queryset=None):
         return get_object_or_404(Task, id=self.kwargs["pk"], user=self.request.user)
@@ -74,13 +75,14 @@ class UpdateTaskStatusView(UpdateView):
         return JsonResponse({"success": False, "errors": form.errors}, status=400)
 
 
-class UpdateTaskView(UpdateView):
+class UpdateTaskView(LoginRequiredMixin, UpdateView):
     """Update task"""
 
     model = Task
     form_class = TaskForm
     template_name = "update.html"
     success_url = reverse_lazy("tasks")
+    login_url = reverse_lazy("login")
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         self.object = form.save()
@@ -90,11 +92,12 @@ class UpdateTaskView(UpdateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class DeleteTaskView(DeleteView):
+class DeleteTaskView(LoginRequiredMixin, DeleteView):
     """Delete task"""
 
     model = Task
     success_url = reverse_lazy("tasks")
+    login_url = reverse_lazy("login")
 
     def get(self, request, *args, **kwargs) -> HttpResponse:
         return self.post(request, *args, **kwargs)
