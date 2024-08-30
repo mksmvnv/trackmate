@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
+from users.validators import validate_no_cyrillic
+
 User = get_user_model()
 
 
@@ -30,6 +32,7 @@ class UserCreationForm(UserCreationForm):
                 "placeholder": "Введите логин",
             }
         ),
+        validators=[validate_no_cyrillic],
     )
 
     password1 = forms.CharField(
