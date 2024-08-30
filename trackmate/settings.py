@@ -17,6 +17,8 @@ AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -43,7 +45,7 @@ ROOT_URLCONF = "trackmate.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "tasks" / "templates", BASE_DIR / "users" / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
