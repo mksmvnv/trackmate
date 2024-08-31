@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "tasks",
     "users",
+    "profiles",
 ]
 
 MIDDLEWARE = [
@@ -46,7 +47,11 @@ ROOT_URLCONF = "trackmate.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "tasks" / "templates", BASE_DIR / "users" / "templates"],
+        "DIRS": [
+            BASE_DIR / "tasks" / "templates", 
+            BASE_DIR / "users" / "templates",
+            BASE_DIR / "profiles" / "templates",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -86,7 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru-RU"
 
 TIME_ZONE = "Europe/Moscow"
 
