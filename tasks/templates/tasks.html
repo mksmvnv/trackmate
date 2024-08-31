@@ -7,14 +7,14 @@ Tasks
 
 {% block content %}
 <!--Task form-->
-<h1 class="text-center m-5">Добавить задачу</h1>
+<h1 class="text-center m-5" style="user-select: none;">Добавить задачу</h1>
 <form method="post" action="{% url 'tasks' %}">
   {{ form.as_p }}
   {% csrf_token %}
   <button type="submit" class="btn btn-dark" id="task-button">Добавить</button>
 </form>
 <!--Tasks list-->
-<h1 class="text-center m-5">Список задач</h1>
+<h1 class="text-center m-5" style="user-select: none;">Список задач</h1>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -55,7 +55,7 @@ Tasks
       {% if page_obj.has_previous %}
         <li class="page-item">
           <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-            <span aria-hidden="true">Предыдущая</span>
+            <span aria-hidden="true"><</span>
           </a>
         </li>
       {% endif %}
@@ -73,7 +73,7 @@ Tasks
       {% if page_obj.has_next %}
         <li class="page-item">
           <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-            <span aria-hidden="true">Следующая</span>
+            <span aria-hidden="true">></span>
           </a>
         </li>
       {% endif %}
