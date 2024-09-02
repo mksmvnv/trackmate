@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<h1 class="text-center m-5">{{ user.username }}</h1>
+<p class="text-center m-5">{{ user.profile.bio }}</p>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
