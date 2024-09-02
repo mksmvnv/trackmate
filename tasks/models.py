@@ -19,4 +19,6 @@ class Task(models.Model):
         verbose_name_plural = "tasks"
 
     def __str__(self):
-        return f"{self.title} @{self.user} {self.created_at.strftime('%d-%m-%Y %H:%M')}"
+        return (
+            f"{self.title} - {self.user} - {self.created_at.strftime('%H:%M %d-%m-%Y')}"
+        )
