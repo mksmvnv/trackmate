@@ -3,8 +3,16 @@
 {% block title %}Профиль пользователя{% endblock %}
 
 {% block content %}
-<h1 class="text-center m-5">{{ user.username }}</h1>
+<div class="text-center m-5">
+    <img src="{{ user.profile.avatar.url }}" alt="avatar" class="rounded-circle" width="150" height="150">
+</div>
+<h1 class="text-center m-2">{{ user.profile.first_name }} {{ user.profile.last_name }}</h1>
+<p class="text-center"><i>@{{ user.username }}</i></p>
+<p class="text-center">Возрат: {{ user.profile.age }}</p>
 <p class="text-center m-5">{{ user.profile.bio }}</p>
+<div class="text-center">
+    <a href="{% url 'edit-profile' user.id %}"><i class="bi bi-pencil-square text-danger"></i></a>
+</div>
 {% endblock %}
 
 {% block scripts %}
