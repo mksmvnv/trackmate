@@ -12,6 +12,7 @@ django = "^5.1"
 black = "^24.8.0"
 python-dotenv = "^1.0.1"
 django-widget-tweaks = "^1.5.0"
+pillow = "^10.4.0"
 
 
 [build-system]
