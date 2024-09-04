@@ -12,14 +12,14 @@ class TaskForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 40px;",
-                    "placeholder": "Название задачи",
+                    "placeholder": "Введите название задачи",
                 }
             ),
             "description": forms.Textarea(
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 60px;",
-                    "placeholder": "Описание задачи",
+                    "placeholder": "Введите описание задачи",
                 }
             ),
         }
