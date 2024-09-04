@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.http import HttpResponse    
+from django.http import HttpResponse
 from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -9,13 +9,15 @@ from profiles.forms import ProfileForm
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     """Profile page"""
+
     template_name = "profile.html"
     login_url = reverse_lazy("login")
 
 
-class EditProfileView(LoginRequiredMixin, UpdateView):
-    """Edit profile"""
-    template_name = "edit_profile.html"
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
+    """Update profile"""
+
+    template_name = "profile_update.html"
     model = Profile
     form_class = ProfileForm
     login_url = reverse_lazy("login")
@@ -25,8 +27,8 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return Profile.objects.get(user=self.request.user)
-    
-    def post(self, request, *args, **kwargs):
+
+    def post(self, request, *args, **kwargs) -> HttpResponse:
         self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():
@@ -34,9 +36,9 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         else:
             return self.form_invalid(form)
 
-    def form_valid(self, form):
+    def form_valid(self, form: ProfileForm) -> HttpResponse:
         form.save()
         return super().form_valid(form)
-    
-    def form_invalid(self, form):
+
+    def form_invalid(self, form: ProfileForm) -> HttpResponse:
         return super().form_invalid(form)
