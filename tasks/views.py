@@ -78,9 +78,9 @@ class UpdateTaskStatusView(LoginRequiredMixin, UpdateView):
 class UpdateTaskView(LoginRequiredMixin, UpdateView):
     """Update task"""
 
+    template_name = "task_update.html"
     model = Task
     form_class = TaskForm
-    template_name = "update.html"
     success_url = reverse_lazy("tasks")
     login_url = reverse_lazy("login")
 
