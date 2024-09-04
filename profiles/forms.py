@@ -5,24 +5,28 @@ from profiles.models import Profile
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ["bio", "avatar", "first_name", "last_name", "gender", "age"]
+        fields = [
+            "image",
+            "first_name",
+            "last_name",
+            "profession",
+            "location",
+            "bio",
+            "gender",
+            "age",
+        ]
         labels = {
-            "bio": "О себе",
-            "avatar": "Аватар",
+            "image": "Фото профиля",
             "first_name": "Имя",
             "last_name": "Фамилия",
+            "profession": "Профессия",
+            "location": "Местоположение",
+            "bio": "О себе",
             "gender": "Пол",
             "age": "Возраст",
         }
         widgets = {
-            "bio": forms.Textarea(
-                attrs={
-                    "class": "form-control",
-                    "style": "width: 100%; height: 60px;",
-                    "placeholder": "О себе",
-                }
-            ),
-            "avatar": forms.FileInput(
+            "image": forms.FileInput(
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 40px;",
@@ -32,14 +36,35 @@ class ProfileForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 40px;",
-                    "placeholder": "Имя",
+                    "placeholder": "Введите имя",
                 }
             ),
             "last_name": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 40px;",
-                    "placeholder": "Фамилия",
+                    "placeholder": "Введите фамилию",
+                }
+            ),
+            "profession": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "style": "width: 100%; height: 40px;",
+                    "placeholder": "Введите профессию",
+                }
+            ),
+            "location": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "style": "width: 100%; height: 40px;",
+                    "placeholder": "Введите местоположение",
+                }
+            ),
+            "bio": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "style": "width: 100%; height: 60px;",
+                    "placeholder": "О себе",
                 }
             ),
             "gender": forms.Select(
@@ -52,7 +77,7 @@ class ProfileForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 40px;",
-                    "placeholder": "Возраст",
+                    "placeholder": "Введите возраст",
                 }
             ),
         }
