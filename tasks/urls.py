@@ -6,10 +6,10 @@ urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
     path("tasks/", views.CreateTaskListView.as_view(), name="tasks"),
     path(
-        "tasks/update_status/<int:pk>/",
+        "tasks/<int:pk>/update_status/",
         views.UpdateTaskStatusView.as_view(),
         name="task-update-status",
     ),
-    path("tasks/update/<int:pk>/", views.UpdateTaskView.as_view(), name="task-update"),
-    path("tasks/delete/<int:pk>/", views.DeleteTaskView.as_view(), name="task-delete"),
+    path("tasks/<int:pk>/update/", views.UpdateTaskView.as_view(), name="task-update"),
+    path("tasks/<int:pk>/delete/", views.DeleteTaskView.as_view(), name="task-delete"),
 ]
