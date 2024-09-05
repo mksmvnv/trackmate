@@ -5,7 +5,7 @@ $(document).ready(function() {
         let status = $(this).is(':checked');
 
         $.ajax({
-            url: 'update_status/' + taskId + '/',
+            url: taskId + '/update_status/',
             method: 'POST',
             data: {
                 'status': status,
