@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.forms import BaseModelForm
+from django.db.models.query import QuerySet
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import (
@@ -9,8 +10,6 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from django.core.paginator import Paginator
-from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404
 
 from tasks.models import Task
@@ -30,20 +29,24 @@ class CreateTaskListView(LoginRequiredMixin, CreateView, ListView):
     model = Task
     form_class = TaskForm
     login_url = reverse_lazy("login")
-    success_url = reverse_lazy("tasks")
     paginate_by = 5
+    success_url = reverse_lazy("tasks")
+
+    def get_queryset(self) -> QuerySet:
+        return Task.objects.filter(user=self.request.user).order_by("created_at")
 
     def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
-
-        task_list = self.get_queryset()
-        paginator = Paginator(task_list, self.paginate_by)
-        page_number = self.request.GET.get("page")
-        page_obj = paginator.get_page(page_number)
-
-        context["page_obj"] = page_obj
-
+        context["form"] = self.get_form()
         return context
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def form_invalid(self, form: BaseModelForm) -> HttpResponse:
+        context = self.get_context_data(form=form)
+        return self.render_to_response(context)
 
     def get_queryset(self) -> QuerySet:
         return Task.objects.filter(user=self.request.user).order_by("created_at")
@@ -63,11 +66,10 @@ class UpdateTaskStatusView(LoginRequiredMixin, UpdateView):
     fields = ["status"]
     login_url = reverse_lazy("login")
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None) -> Task:
         return get_object_or_404(Task, id=self.kwargs["pk"], user=self.request.user)
 
     def form_valid(self, form: BaseModelForm) -> JsonResponse:
-        form.instance.status = self.request.POST.get("status") == "true"
         self.object = form.save()
         return JsonResponse({"success": True})
 
@@ -98,6 +100,3 @@ class DeleteTaskView(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy("tasks")
     login_url = reverse_lazy("login")
-
-    def get(self, request, *args, **kwargs) -> HttpResponse:
-        return self.post(request, *args, **kwargs)

@@ -1,7 +1,7 @@
 from django.views import View
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 
 from users.forms import UserCreationForm
 
@@ -20,11 +20,7 @@ class RegisterView(View):
     def post(self, request) -> HttpResponse:
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = authenticate(
-                username=form.cleaned_data["username"],
-                password=form.cleaned_data["password1"],
-            )
+            user = form.save()
             login(request, user)
             return redirect("index")
 
