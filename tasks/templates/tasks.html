@@ -7,14 +7,14 @@ Tasks
 
 {% block content %}
 <!--Task form-->
-<h1 class="text-center m-5" style="user-select: none;">Добавить задачу</h1>
+<h1 class="text-center m-5">Добавить задачу</h1>
 <form method="post" action="{% url 'tasks' %}">
   {{ form.as_p }}
   {% csrf_token %}
   <button type="submit" class="btn btn-dark" id="submit-button">Добавить</button>
 </form>
 <!--Tasks list-->
-<h1 class="text-center m-5" style="user-select: none;">Список задач</h1>
+<h1 class="text-center m-5">Список задач</h1>
 <table class="table table-striped">
   <thead>
     <tr>
