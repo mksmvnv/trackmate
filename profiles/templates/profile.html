@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Профиль пользователя{% endblock %}
+{% block title %}Профиль - {{ user.username }}{% endblock %}
 
 {% block content %}
+<div id="user-id" data-user-id="{{ user.id }}"></div>
 <div class="text-center m-5">
     <img src="{{ user.profile.image.url }}" alt="image" class="rounded-circle" width="150" height="150">
 </div>
 <div class="container text-center">
     <div class="row justify-content-center">
-        <div class="col-auto d-flex align-items-center">
+        <div class="col-auto d-flex align-items-center mb-3">
             {% if user.profile.first_name or user.profile.last_name %}
                 <span><h1>{{ user.profile.first_name|default:'' }} {{ user.profile.last_name|default:'' }}</h1></span>
             {% else %}
@@ -40,7 +42,18 @@
 {% if user.profile.bio %}
     <p class="text-center mt-5">{{ user.profile.bio }}</p>
 {% endif %}
+
+<h2 class="text-center m-5">Статистика по задачам 🔬</h2>
+<div class="container text-center">
+    {% if user.tasks.count %}
+        <canvas id="taskStatusChart" style="width: 400px; height: 400px; margin: 0 auto"></canvas>
+    {% else %}
+        <p class="text-center">Пока задач нет</p>
+    {% endif %}
+</div>
 {% endblock %}
 
 {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'profiles/js/chart.js' %}"></script>
 {% endblock %}
