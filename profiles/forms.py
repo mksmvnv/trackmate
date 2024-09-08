@@ -3,10 +3,22 @@ from profiles.models import Profile
 
 
 class ProfileForm(forms.ModelForm):
+    clear_image = forms.BooleanField(
+        required=False,
+        label="Удалить текущее изображение",
+        widget=forms.CheckboxInput(
+            attrs={
+                "class": "form-check-input",
+                "style": "width: 20px; height: 20px;",
+            }
+        ),
+    )
+
     class Meta:
         model = Profile
         fields = [
             "image",
+            "clear_image",
             "first_name",
             "last_name",
             "profession",
@@ -81,3 +93,15 @@ class ProfileForm(forms.ModelForm):
                 }
             ),
         }
+
+        def save(self, commit=True):
+            profile = super().save(commit=False)
+
+            if self.cleaned_data.get("clear_image"):
+                profile.image.delete(save=False)
+                profile.image = f"profile_images/default_profile_image_user_{profile.user.id}.png"  # Set the default image
+
+            if commit:
+                profile.save()
+
+            return profile
