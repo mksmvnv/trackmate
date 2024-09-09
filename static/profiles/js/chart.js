@@ -18,8 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function createChart() {
+        const canvas = document.getElementById('taskStatusChart');
+        if (!canvas) {
+            return; 
+        }
+
         const data = await fetchTaskStatus();
-        const ctx = document.getElementById('taskStatusChart').getContext('2d');
+        const ctx = canvas.getContext('2d');
 
         new Chart(ctx, {
             type: 'doughnut',
@@ -39,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     legend: {
                         position: 'bottom',
                         labels: {
-                            padding: 30,
+                            padding: 60,
                         }
                     },
                     maintainAspectRatio: false,
