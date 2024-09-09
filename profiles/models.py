@@ -3,7 +3,7 @@ import os
 from django.db import models
 from django.conf import settings
 
-from profiles.utils import FilePathManager, ImageGenerator
+from profiles.utils import ImageGenerator, FilePathProcessor
 
 
 class Profile(models.Model):
@@ -17,7 +17,7 @@ class Profile(models.Model):
         settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE
     )
     image = models.ImageField(
-        upload_to=FilePathManager("profile_images/").get_upload_path,
+        upload_to=FilePathProcessor("profile_images/"),
         blank=True,
         null=True,
     )
@@ -40,12 +40,26 @@ class Profile(models.Model):
         return self.user.username
 
     def save(self, *args, **kwargs):
-        default_image_path = (
-            f"profile_images/default_profile_image_user_{self.user.id}.png"
-        )
+        if self.pk:
+            try:
+                old_profile = Profile.objects.get(pk=self.pk)
+                old_image = old_profile.image
+            except Profile.DoesNotExist:
+                old_image = None
 
-        if not self.image or self.image.name == default_image_path:
-            self.image = ImageGenerator().generate_image(self)
+            profile_image_manager = ProfileImageManager(self)
+
+            if old_image and old_image != self.image:
+                old_image_path = old_image.path
+
+                if os.path.exists(old_image_path) and old_image_path != self.image.path:
+                    if not profile_image_manager.is_default_image(old_image_path):
+                        os.remove(old_image_path)
+
+        if not self.image:
+            image_generator = ImageGenerator()
+            default_image_path = image_generator.generate_image(self)
+            self.image = default_image_path
 
         super().save(*args, **kwargs)
 
@@ -53,9 +67,7 @@ class Profile(models.Model):
 class ProfileImageManager:
     def __init__(self, instance):
         self.instance = instance
-        self.default_image_path = (
-            f"profile_images/default_profile_image_user_{self.instance.user.id}.png"
-        )
+        self.default_image_path = f"profile_images/default/user_{self.instance.user.id}/default_profile_image_user_{self.instance.user.id}.png"
 
     def get_old_image(self) -> str:
         try:
