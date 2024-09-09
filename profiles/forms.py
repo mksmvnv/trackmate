@@ -1,4 +1,5 @@
 from django import forms
+
 from profiles.models import Profile
 
 
@@ -94,14 +95,13 @@ class ProfileForm(forms.ModelForm):
             ),
         }
 
-        def save(self, commit=True):
-            profile = super().save(commit=False)
+    def save(self, commit=True):
+        profile = super().save(commit=False)
 
-            if self.cleaned_data.get("clear_image"):
-                profile.image.delete(save=False)
-                profile.image = f"profile_images/default_profile_image_user_{profile.user.id}.png"  # Set the default image
+        if self.cleaned_data.get("clear_image"):
+            profile.image = f"profile_images/default/user_{profile.user.id}/default_profile_image_user_{profile.user.id}.png"
 
-            if commit:
-                profile.save()
+        if commit:
+            profile.save()
 
-            return profile
+        return profile
