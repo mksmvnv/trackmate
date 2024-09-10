@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
 trackmate
@@ -7,19 +8,21 @@ trackmate
 
 {% block content %}
 {% if user.is_authenticated %}
-<h1 class="text-center m-5"><code class="text-danger">{{ user.username }}</code>, добро пожаловать в <code class="text-danger">trackmate</code> 👋</h1>
-<p class="text-center">С возвращением мой друг!</p>
+<h1 class="text-center m-5">
+  <code class="text-danger">{{ user.username }}</code>{% translate ", добро пожаловать в " %}<code class="text-danger">trackmate</code> 👋
+</h1>
+<p class="text-center">{% translate "С возвращением мой друг!" %}</p>
 <div class="text-center">
   <a href="{% url 'tasks' %}">
-    <button class="btn btn-success btn-lg m-5">Перейти к задачам</button>
+    <button class="btn btn-success btn-lg m-5">{% translate "Перейти к задачам" %}</button>
   </a>
 </div>
 {% else %}
-<h1 class="text-center m-5">Незнакомец, добро пожаловать в <code class="text-danger">trackmate</code> 👋</h1>
-<p class="text-center">Авторизуйся и пользуйся этим прекрасным приложением!</p>
+<h1 class="text-center m-5">{% translate "Незнакомец, добро пожаловать в " %}<code class="text-danger">trackmate</code> 👋</h1>
+<p class="text-center">{% translate "Авторизуйся и пользуйся этим прекрасным приложением!" %}</p>
 <div class="text-center">
   <a href="{% url 'login' %}">
-    <button class="btn btn-danger btn-lg m-5">Авторизоваться</button>
+    <button class="btn btn-danger btn-lg m-5">{% translate "Авторизоваться" %}</button>
   </a>
 </div>
 {% endif %}
