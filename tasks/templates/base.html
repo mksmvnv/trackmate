@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html lang="en" id="html-theme">
 <head>
   <meta charset="UTF-8">
@@ -28,24 +29,33 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="{% url 'tasks' %}">Задачи</a>
-          <a class="nav-link" href="#">Активность</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'tasks' %}">{% translate "Задачи" %}</a>
+          <a class="nav-link" href="#">{% translate "Пароли" %}</a>
         </div>
-        <div class="navbar-nav ms-auto">
-          <span class="nav-link" id="theme-toggle" style="cursor: pointer;">
-            <i class="bi bi-brightness-high" id="theme-icon"></i>
-          </span>
-        </div>
-        <div class ="navbar-nav me">
-          {% if user.is_authenticated %}
-            <a class="nav-link" href="{% url 'profile' user.id %}"><i class="bi bi-person"></i></a>
-            <form action="{% url 'logout' %}" method="post">
-              {% csrf_token %}
-              <button class="nav-link" type="submit"><i class="bi bi-box-arrow-left"></i></button>
+        <div class="navbar-collapse collapse">
+          <div class="navbar-nav ms-auto">
+            <form action="{% url 'set-language' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="language" value="{% if request.LANGUAGE_CODE == 'ru' %}en{% else %}ru{% endif %}">
+                <button class="nav-link" type="submit"><i class="bi bi-translate"></i></button>
             </form>
-          {% else %}
-            <a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i></a>
-          {% endif %}
+          </div>
+          <div class="navbar-nav">
+            <span class="nav-link" id="theme-toggle" style="cursor: pointer;">
+              <i class="bi bi-brightness-high" id="theme-icon"></i>
+            </span>
+          </div>
+          <div class ="navbar-nav">
+            {% if user.is_authenticated %}
+              <a class="nav-link" href="{% url 'profile' user.id %}"><i class="bi bi-person"></i></a>
+              <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button class="nav-link" type="submit"><i class="bi bi-box-arrow-left"></i></button>
+              </form>
+            {% else %}
+              <a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i></a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
