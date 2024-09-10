@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-Обновить задачу
+{% translate "Обновить задачу" %}
 {% endblock %}
 
 {% block content %}
-<h1 class="text-center m-5">Обновить задачу</h1>
+<h1 class="text-center m-5">{% translate "Обновить задачу" %}</h1>
 <form method="post" action="{% url 'task-update' task.id %}">
     {{ form.as_p }}
     {% csrf_token %}
-    <button type="submit" class="btn btn-dark" id="submit-button">Обновить</button>
+    <button type="submit" class="btn btn-dark" id="submit-button">{% translate "Обновить" %}</button>
 </form>
 {% endblock %}
 
