@@ -38,8 +38,12 @@ msgid "Задачи"
 msgstr "Tasks"
 
 #: tasks/templates/base.html:33
-msgid "Пароли"
-msgstr "Passwords"
+msgid "Активность"
+msgstr "Activity"
+
+#: tasks/templates/base.html:35 profile/templates/profile.html:4
+msgid "Профиль"
+msgstr "Profile"
 
 #: tasks/templates/index.html:12
 msgid ", добро пожаловать в "
@@ -104,3 +108,54 @@ msgstr ""
 #: users/validators.py:10
 msgid "Логин может содержать только латинские буквы"
 msgstr "Login can contain only Latin letters"
+
+#: profile/templates/profile_update.html:7
+msgid "Редактирование профиля"
+msgstr "Edit profile"
+
+#: profile/templates/profile_update.html:11
+msgid "Сохранить"
+msgstr "Save"
+
+#: profile/templates/profile:46
+msgid "Статистика по задачам 🔬"
+msgstr "Task statistics 🔬"
+
+#: profile/forms.py:10
+msgid "Удалить текущее изображение"
+msgstr "Delete current image"
+
+#: profile/forms.py:33
+msgid "Фото профиля"
+msgstr "Profile photo"
+
+#: profile/forms.py:34
+msgid "Имя"
+msgstr "First name"
+
+#: profile/forms.py:35
+msgid "Фамилия"
+msgstr "Last name"
+
+#: profile/forms.py:36
+msgid "Профессия"
+msgstr "Profession"
+
+#: profile/forms.py:37
+msgid "Местоположение"
+msgstr "Location"
+
+#: profile/forms.py:37
+msgid "О себе"
+msgstr "About me"
+
+#: profile/forms.py:37
+msgid "Пол"
+msgstr "Gender"
+
+#: profile/forms.py:37
+msgid "Возраст"
+msgstr "Age"
+
+
+
