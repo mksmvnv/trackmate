@@ -1,4 +1,5 @@
 // AJAX checkbox
+
 $(document).ready(function() {
     $('input[type="checkbox"]').change(function() {
         let taskId = $(this).data('id');
