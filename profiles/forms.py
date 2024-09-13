@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from profiles.models import Profile
 
@@ -6,7 +7,7 @@ from profiles.models import Profile
 class ProfileForm(forms.ModelForm):
     clear_image = forms.BooleanField(
         required=False,
-        label="Удалить текущее изображение",
+        label=_("Удалить текущее изображение"),
         widget=forms.CheckboxInput(
             attrs={
                 "class": "form-check-input",
@@ -29,14 +30,14 @@ class ProfileForm(forms.ModelForm):
             "age",
         ]
         labels = {
-            "image": "Фото профиля",
-            "first_name": "Имя",
-            "last_name": "Фамилия",
-            "profession": "Профессия",
-            "location": "Местоположение",
-            "bio": "О себе",
-            "gender": "Пол",
-            "age": "Возраст",
+            "image": _("Фото профиля"),
+            "first_name": _("Имя"),
+            "last_name": _("Фамилия"),
+            "profession": _("Профессия"),
+            "location": _("Местоположение"),
+            "bio": _("О себе"),
+            "gender": _("Пол"),
+            "age": _("Возраст"),
         }
         widgets = {
             "image": forms.FileInput(
@@ -49,35 +50,35 @@ class ProfileForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 40px;",
-                    "placeholder": "Введите имя",
+                    "placeholder": _("Введите имя"),
                 }
             ),
             "last_name": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 40px;",
-                    "placeholder": "Введите фамилию",
+                    "placeholder": _("Введите фамилию"),
                 }
             ),
             "profession": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 40px;",
-                    "placeholder": "Введите профессию",
+                    "placeholder": _("Введите профессию"),
                 }
             ),
             "location": forms.TextInput(
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 40px;",
-                    "placeholder": "Введите местоположение",
+                    "placeholder": _("Введите местоположение"),
                 }
             ),
             "bio": forms.Textarea(
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 60px;",
-                    "placeholder": "О себе",
+                    "placeholder": _("О себе"),
                 }
             ),
             "gender": forms.Select(
@@ -90,7 +91,7 @@ class ProfileForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "style": "width: 100%; height: 40px;",
-                    "placeholder": "Введите возраст",
+                    "placeholder": _("Введите возраст"),
                 }
             ),
         }
