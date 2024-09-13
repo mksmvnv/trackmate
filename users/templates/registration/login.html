@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Авторизация{% endblock %}
+{% block title %}{% translate "Авторизация" %}{% endblock %}
 
-{% block content %} 
-<h1 class="text-center m-5">Авторизация</h1>
+{% block content %}
+<h1 class="text-center m-5">{% translate "Авторизация" %}</h1>
 {% load widget_tweaks %}
 <form action="{% url 'login' %}" method="post">
-    <label for="{{ form.username.id_for_label }}">Логин:</label>
+    <label for="{{ form.username.id_for_label }}">{% translate "Логин" %}:</label>
     {{ form.username|add_class:"form-control mb-2 mt-2"|attr:"placeholder:Введите логин" }}
-    <label for="{{ form.password.id_for_label }}">Пароль:</label>
+    <label for="{{ form.password.id_for_label }}">{% translate "Пароль" %}:</label>
     {{ form.password|add_class:"form-control mb-2"|attr:"placeholder:Введите пароль" }}
     {{ form.non_field_errors }}
     {% csrf_token %}
-    <button type="submit" class="btn btn-success mt-3">Войти</button>
+    <button type="submit" class="btn btn-success mt-3">{% translate "Войти" %}</button>
 </form>
-<p class="mt-5">Забыли пароль? <a href="{% url 'password_reset' %}">Восстановить пароль</a></p>
-<p class="mt-2">Ещё нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+<p class="mt-5">{% translate "Забыли пароль?" %} <a href="{% url 'password_reset' %}">{% translate "Восстановить пароль" %}</a></p>
+<p class="mt-2">{% translate "Ещё нет аккаунта?" %} <a href="{% url 'register' %}">{% translate "Зарегистрироваться" %}</a></p>
 {% endblock %}
 
 {% block scripts %}
