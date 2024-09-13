@@ -8,9 +8,8 @@ trackmate
 
 {% block content %}
 {% if user.is_authenticated %}
-<h1 class="text-center m-5">
-  <code class="text-danger">{{ user.username }}</code>{% translate ", добро пожаловать в " %}<code class="text-danger">trackmate</code> 👋
-</h1>
+<h1 class="text-center m-5"><span class="text-danger">{{ user.username }}</span>{% translate ", добро пожаловать в " %} 
+  <span class="text-danger">trackmate</span> 👋</h1>
 <p class="text-center">{% translate "С возвращением мой друг!" %}</p>
 <div class="text-center">
   <a href="{% url 'tasks' %}">
@@ -18,7 +17,8 @@ trackmate
   </a>
 </div>
 {% else %}
-<h1 class="text-center m-5">{% translate "Незнакомец, добро пожаловать в " %}<code class="text-danger">trackmate</code> 👋</h1>
+<h1 class="text-center m-5">{% translate "Незнакомец, добро пожаловать в " %} 
+  <span class="text-danger">trackmate</span> 👋</h1>
 <p class="text-center">{% translate "Авторизуйся и пользуйся этим прекрасным приложением!" %}</p>
 <div class="text-center">
   <a href="{% url 'login' %}">
