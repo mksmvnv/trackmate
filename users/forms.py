@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.utils.translation import gettext_lazy as _
 
 from users.validators import validate_no_cyrillic
 
@@ -17,7 +18,7 @@ class UserCreationForm(UserCreationForm):
             attrs={
                 "autocomplete": "email",
                 "class": "form-control",
-                "placeholder": "Введите email",
+                "placeholder": _("Введите email"),
             }
         ),
     )
@@ -29,7 +30,7 @@ class UserCreationForm(UserCreationForm):
             attrs={
                 "autocomplete": "username",
                 "class": "form-control",
-                "placeholder": "Введите логин",
+                "placeholder": _("Введите логин"),
             }
         ),
         validators=[validate_no_cyrillic],
@@ -41,7 +42,7 @@ class UserCreationForm(UserCreationForm):
             attrs={
                 "autocomplete": "new-password",
                 "class": "form-control",
-                "placeholder": "Введите пароль",
+                "placeholder": _("Введите пароль"),
             }
         ),
     )
@@ -52,7 +53,7 @@ class UserCreationForm(UserCreationForm):
             attrs={
                 "autocomplete": "new-password",
                 "class": "form-control",
-                "placeholder": "Подтвердите пароль",
+                "placeholder": _("Подтвердите пароль"),
             }
         ),
     )
