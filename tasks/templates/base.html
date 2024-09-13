@@ -23,14 +23,17 @@
           <path d="M159.667 377L90 446.667L58.3334 415" stroke="#F5F5F5" stroke-width="21" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
-      <a class="navbar-brand" href="{% url 'index' %}"><b>trackmate</b></a>
+      <a class="navbar-brand text-logo" href="{% url 'index' %}"><b>trackmate</b></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="{% url 'tasks' %}">{% translate "Задачи" %}</a>
-          <a class="nav-link" href="#">{% translate "Пароли" %}</a>
+          <a class="nav-link" href="{% url 'tasks' %}" id="navbar-tasks">{% translate "Задачи" %}</a>
+          <a class="nav-link" href="#" id="navbar-activity">{% translate "Активность" %}</a>
+          {% if user.is_authenticated %}
+            <a class="nav-link" href="{% url 'profile' user.id %}" id="navbar-profile">{% translate "Профиль" %}</a>
+          {% endif %}
         </div>
         <div class="navbar-collapse collapse">
           <div class="navbar-nav ms-auto">
@@ -45,17 +48,18 @@
               <i class="bi bi-brightness-high" id="theme-icon"></i>
             </span>
           </div>
-          <div class ="navbar-nav">
-            {% if user.is_authenticated %}
-              <a class="nav-link" href="{% url 'profile' user.id %}"><i class="bi bi-person"></i></a>
+          {% if user.is_authenticated %}
+            <div class="navbar-nav">
               <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button class="nav-link" type="submit"><i class="bi bi-box-arrow-left"></i></button>
               </form>
-            {% else %}
+            </div>
+          {% else %}
+            <div class="navbar-nav">
               <a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i></a>
-            {% endif %}
-          </div>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -78,6 +82,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{% static 'tasks/js/themes.js' %}"></script>
+  <script src="{% static 'tasks/js/active.js' %}"></script>
   {% block scripts %}{% endblock %}
   </body>
 </html>
