@@ -1,3 +1,17 @@
+/* Fonts */
+
+@font-face {
+    font-family: 'FiraCodeRegular'; 
+    src: url("/static/fonts/fira_code/FiraCode-Regular.ttf") format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'KodeMonoSemiBold';
+    src: url("/static/fonts/kode_mono/KodeMono-SemiBold.ttf") format('truetype');
+    font-weight: 600;
+}
+
 /* General */
 
 html, body {
@@ -6,20 +20,34 @@ html, body {
     padding: 0;
 }
 
+/* Theme */
+
 #html-theme {
     display: flex;
     flex-direction: column;
     min-height: 100%;
 }
 
+/* Body */
+
 body {
     display: flex;
     flex-direction: column;
+
+    font-family: 'FiraCodeRegular', monospace !important;
 }
+
+.text-logo {
+    font-family: 'KodeMonoSemiBold', monospace !important;
+}
+
+/* Header */
 
 main.container {
     flex-grow: 1;
 }
+
+/* Footer */
 
 footer {
     margin-top: auto;
