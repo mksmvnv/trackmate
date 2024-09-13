@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Профиль - {{ user.username }}{% endblock %}
+{% block title %}
+    {% translate "Профиль" %} - {{ user.username }}
+{% endblock %}
 
 {% block content %}
 <div id="user-id" data-user-id="{{ user.id }}"></div>
@@ -43,7 +46,7 @@
     <p class="text-center mt-5">{{ user.profile.bio }}</p>
 {% endif %}
 
-<h2 class="text-center m-5">Статистика по задачам 🔬</h2>
+<h2 class="text-center m-5">{% translate "Статистика по задачам 🔬" %}</h2>
 <div class="container text-center">
     {% if user.tasks.count %}
         <canvas id="taskStatusChart" style="width: 400px; height: 400px; margin: 0 auto"></canvas>
