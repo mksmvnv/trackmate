@@ -2,12 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}Редактирование профиля{% endblock %}
+{% block title %}{% translate "Редактирование профиля" %}{% endblock %}
 
 {% block content %}
 <h1 class="text-center m-5">{% translate "Редактирование профиля" %}</h1>
 <form action="{% url 'profile-update' user.id %}" method="post" enctype="multipart/form-data">
     {{ form.as_p }}
+    {{ form.non_field_errors }}
     {% csrf_token %}
     <button type="submit" class="btn btn-dark" id="submit-button">{% translate "Сохранить" %}</button>
 </form>

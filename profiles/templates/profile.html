@@ -2,9 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-    {% translate "Профиль" %} - {{ user.username }}
-{% endblock %}
+{% block title %}{% translate "Профиль" %} - {{ user.username }}{% endblock %}
 
 {% block content %}
 <div id="user-id" data-user-id="{{ user.id }}"></div>
