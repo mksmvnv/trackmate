@@ -2,14 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-    {% translate "Регистрация" %}
-{% endblock %}
+{% block title %}{% translate "Регистрация" %}{% endblock %}
 
 {% block content %}
 <h1 class="text-center m-5">{% translate "Регистрация" %}</h1>
 <form action="{% url 'register' %}" method="post">
     {{ form.as_p }}
+    {{ form.non_field_errors }}
     {% csrf_token %}
     <button type="submit" class="btn btn-success mt-3">{% translate "Зарегистрироваться" %}</button>
 </form>
