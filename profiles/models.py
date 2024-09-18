@@ -2,15 +2,16 @@ import os
 
 from django.db import models
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 from profiles.utils import ImageGenerator, FilePathProcessor
 
 
 class Profile(models.Model):
     GENDER_CHOICES = [
-        ("М", "Мужской"),
-        ("Ж", "Женский"),
-        ("Д", "Другое"),
+        (_("М"), _("Мужской")),
+        (_("Ж"), _("Женский")),
+        (_("Д"), _("Другое")),
     ]
 
     user = models.OneToOneField(
