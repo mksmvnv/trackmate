@@ -9,7 +9,8 @@
 <div class="text-center m-5">
     <img src="{{ user.profile.image.url }}" alt="image" class="rounded-circle" width="150" height="150">
 </div>
-<div class="container text-center">
+<p class="text-center"><i>@{{ user.username }}</i></p>
+<div class="text-center">
     <div class="row justify-content-center">
         <div class="col-auto d-flex align-items-center mb-3">
             {% if user.profile.first_name or user.profile.last_name %}
@@ -23,29 +24,47 @@
         </div>
     </div>
 </div>
-<p class="text-center"><i>@{{ user.username }}</i></p>
-{% if user.profile.age %}
-    <p class="text-center">{{ user.profile.age }} лет</p>
-{% endif %}
-{% if user.profile.profession %}
-    <p class="text-center">{{ user.profile.profession }}</p>
-{% endif %}
 {% if user.profile.location %}
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-auto d-flex align-items-center">
-                <i class="bi bi-geo-alt text-reset"></i>
-                <p class="ms-2 mb-0"><i>{{ user.profile.location }}</i></p>
-            </div>
+    <div class="row text-center justify-content-center">
+        <div class="col-auto d-flex align-items-center">
+            <i class="bi bi-geo-alt text-reset"></i>
+            <p class="ms-2 mb-0">{{ user.profile.location }}</p>
         </div>
     </div>
 {% endif %}
 {% if user.profile.bio %}
-    <p class="text-center mt-5">{{ user.profile.bio }}</p>
+    <p class="text-center m-4">{{ user.profile.bio }}</p>
 {% endif %}
-
+<div class="text-center m-4">
+    <a href="#collapseToggle" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseToggle">
+        {% translate "Подробнее" %}
+    </a>
+</div>
+<div class="collapse mt-3" id="collapseToggle">
+    {% if user.profile.age %}
+        <p class="text-center">{{ user.profile.age }} лет</p>
+    {% endif %}
+    {% if user.profile.gender %}
+        {% if user.profile.gender == 'М' %}
+            <div class="d-flex justify-content-center m-2">
+                <i class="bi bi-gender-male"></i>
+            </div>
+        {% elif user.profile.gender == 'Ж' %}
+            <div class="d-flex justify-content-center m-2">
+                <i class="bi bi-gender-female"></i>
+            </div>
+        {% else %}
+            <div class="d-flex justify-content-center m-2">
+                <i class="bi bi-gender-ambiguous"></i>
+            </div>
+        {% endif %}
+    {% endif %}
+    {% if user.profile.profession %}
+        <p class="text-center">{{ user.profile.profession }}</p>
+    {% endif %}
+</div>
 <h2 class="text-center m-5">{% translate "Статистика по задачам 🔬" %}</h2>
-<div class="container text-center">
+<div class="text-center">
     {% if user.tasks.count %}
         <canvas id="taskStatusChart" style="width: 400px; height: 400px; margin: 0 auto"></canvas>
     {% else %}
