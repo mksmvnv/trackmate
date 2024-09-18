@@ -32,7 +32,7 @@ async function createChart() {
             datasets: [{
                 label: 'Статус задач',
                 data: [data.in_progress || 0, data.completed || 0],
-                backgroundColor: ['#9B82F7', '#FBE7A2'],
+                backgroundColor: ['#9b82f7', '#fbe7a2'],
                 borderWidth: 0,
                 hoverOffset: 4
             }]
