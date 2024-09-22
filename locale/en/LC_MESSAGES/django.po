@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-10 13:34+0300\n"
+"POT-Creation-Date: 2024-09-22 20:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,110 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: profiles/forms.py:10
+msgid "Удалить текущее изображение"
+msgstr "Delete current image"
+
+#: profiles/forms.py:40
+msgid "Фото профиля"
+msgstr "Profile image"
+
+#: profiles/forms.py:41
+msgid "Имя"
+msgstr "First name"
+
+#: profiles/forms.py:42
+msgid "Фамилия"
+msgstr "Last name"
+
+#: profiles/forms.py:43
+msgid "Профессия"
+msgstr "Profession"
+
+#: profiles/forms.py:44
+msgid "Местоположение"
+msgstr "Location"
+
+#: profiles/forms.py:45 profiles/forms.py:84
+msgid "О себе"
+msgstr "About me"
+
+#: profiles/forms.py:46
+msgid "Пол"
+msgstr "Gender"
+
+#: profiles/forms.py:47
+msgid "Возраст"
+msgstr "Age"
+
+#: profiles/forms.py:59
+msgid "Введите имя"
+msgstr "Enter fist name"
+
+#: profiles/forms.py:65
+msgid "Введите фамилию"
+msgstr "Enter last name"
+
+#: profiles/forms.py:71
+msgid "Введите профессию"
+msgstr "Enter profession"
+
+#: profiles/forms.py:77
+msgid "Введите местоположение"
+msgstr "Enter location"
+
+#: profiles/forms.py:95
+msgid "Введите возраст"
+msgstr "Enter age"
+
+#: profiles/models.py:12
+msgid "М"
+msgstr "M"
+
+#: profiles/models.py:12
+msgid "Мужской"
+msgstr "Male"
+
+#: profiles/models.py:13
+msgid "Ж"
+msgstr "F"
+
+#: profiles/models.py:13
+msgid "Женский"
+msgstr "Female"
+
+#: profiles/models.py:14
+msgid "Д"
+msgstr "O"
+
+#: profiles/models.py:14
+msgid "Другое"
+msgstr "Other"
+
+#: profiles/templates/profile.html:5 tasks/templates/base.html:35
+msgid "Профиль"
+msgstr "Profile"
+
+#: profiles/templates/profile.html:40
+msgid "Подробнее"
+msgstr "Read more"
+
+#: profiles/templates/profile.html:66
+msgid "Статистика по задачам 🔬"
+msgstr "Task statistics 🔬"
+
+#: profiles/templates/profile_update.html:5
+#: profiles/templates/profile_update.html:8
+msgid "Редактирование профиля"
+msgstr "Edit profile"
+
+#: profiles/templates/profile_update.html:13
+msgid "Сохранить"
+msgstr "Save"
+
 #: tasks/forms.py:11
 msgid "Название"
-msgstr "Title"
+msgstr "Name"
 
 #: tasks/forms.py:11
 msgid "Описание"
@@ -27,7 +128,7 @@ msgstr "Description"
 
 #: tasks/forms.py:17
 msgid "Введите название задачи"
-msgstr "Enter the task title"
+msgstr "Enter the task name"
 
 #: tasks/forms.py:24
 msgid "Введите описание задачи"
@@ -41,23 +142,19 @@ msgstr "Tasks"
 msgid "Активность"
 msgstr "Activity"
 
-#: tasks/templates/base.html:35 profile/templates/profile.html:4
-msgid "Профиль"
-msgstr "Profile"
-
-#: tasks/templates/index.html:12
+#: tasks/templates/index.html:11
 msgid ", добро пожаловать в "
 msgstr ", welcome to "
 
-#: tasks/templates/index.html:14
+#: tasks/templates/index.html:13
 msgid "С возвращением мой друг!"
 msgstr "Welcome back my friend!"
 
-#: tasks/templates/index.html:17
+#: tasks/templates/index.html:16
 msgid "Перейти к задачам"
 msgstr "Go to tasks"
 
-#: tasks/templates/index.html:21
+#: tasks/templates/index.html:20
 msgid "Незнакомец, добро пожаловать в "
 msgstr "Stranger, welcome to "
 
@@ -65,7 +162,7 @@ msgstr "Stranger, welcome to "
 msgid "Авторизуйся и пользуйся этим прекрасным приложением!"
 msgstr "Log in and use this great app!"
 
-#: tasks/templates/index.html:25
+#: tasks/templates/index.html:25 users/templates/registration/register.html:15
 msgid "Авторизоваться"
 msgstr "Login"
 
@@ -73,7 +170,7 @@ msgstr "Login"
 msgid "Обновить задачу"
 msgstr "Update task"
 
-#: tasks/templates/task_update.html:14
+#: tasks/templates/task_update.html:15
 msgid "Обновить"
 msgstr "Update"
 
@@ -81,15 +178,15 @@ msgstr "Update"
 msgid "Добавить задачу ✍️"
 msgstr "Add task ✍️"
 
-#: tasks/templates/tasks.html:15
+#: tasks/templates/tasks.html:16
 msgid "Добавить"
 msgstr "Add"
 
-#: tasks/templates/tasks.html:18
+#: tasks/templates/tasks.html:19
 msgid "Список задач 📃"
-msgstr "Task list 📃"
+msgstr "Task list"
 
-#: tasks/templates/tasks.html:23
+#: tasks/templates/tasks.html:24
 msgid ""
 "\n"
 "      <th scope=\"col\">Название</th>\n"
@@ -99,63 +196,128 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"      <th scope=\"col\">Title</th>\n"
+"      <th scope=\"col\">Name</th>\n"
 "      <th scope=\"col\">Description</th>\n"
 "      <th scope=\"col\">Status</th>\n"
 "      <th scope=\"col\">Actions</th>\n"
 "      "
 
+#: trackmate/settings.py:101
+msgid "Russian"
+msgstr "Russian"
+
+#: trackmate/settings.py:102
+msgid "English"
+msgstr "English"
+
+#: users/forms.py:28 users/forms.py:112
+msgid "Введите email"
+msgstr "Enter email"
+
+#: users/forms.py:34 users/forms.py:78
+msgid "Логин"
+msgstr "Login"
+
+#: users/forms.py:40 users/forms.py:83
+msgid "Введите логин"
+msgstr "Enter login"
+
+#: users/forms.py:47 users/forms.py:90
+msgid "Пароль"
+msgstr "Password"
+
+#: users/forms.py:52 users/forms.py:95
+msgid "Введите пароль"
+msgstr "Enter password"
+
+#: users/forms.py:58
+msgid "Повторите пароль"
+msgstr "Repeat password"
+
+#: users/forms.py:63
+msgid "Подтвердите пароль"
+msgstr "Confirm password"
+
+#: users/forms.py:123
+msgid "Новый пароль"
+msgstr "New password"
+
+#: users/forms.py:128
+msgid "Введите новый пароль"
+msgstr "Enter new password"
+
+#: users/forms.py:134
+msgid "Повторите новый пароль"
+msgstr "Repeat new password"
+
+#: users/forms.py:139
+msgid "Подтвердите новый пароль"
+msgstr "Confirm new password"
+
+#: users/templates/registration/login.html:5
+#: users/templates/registration/login.html:8
+msgid "Авторизация"
+msgstr "Authorization"
+
+#: users/templates/registration/login.html:13
+msgid "Войти"
+msgstr "Login"
+
+#: users/templates/registration/login.html:15
+msgid "Забыли пароль?"
+msgstr "Forgot your password?"
+
+#: users/templates/registration/login.html:15
+#: users/templates/registration/password_reset_form.html:13
+msgid "Восстановить пароль"
+msgstr "Recover password"
+
+#: users/templates/registration/login.html:16
+msgid "Ещё нет аккаунта?"
+msgstr "Don't have an account yet?"
+
+#: users/templates/registration/login.html:16
+#: users/templates/registration/register.html:13
+msgid "Зарегистрироваться"
+msgstr "Register"
+
+#: users/templates/registration/password_reset_complete.html:5
+#: users/templates/registration/password_reset_complete.html:8
+#: users/templates/registration/password_reset_confirm.html:5
+#: users/templates/registration/password_reset_confirm.html:8
+#: users/templates/registration/password_reset_done.html:5
+#: users/templates/registration/password_reset_done.html:8
+#: users/templates/registration/password_reset_form.html:5
+#: users/templates/registration/password_reset_form.html:8
+msgid "Восстановление пароля"
+msgstr "Password recovery"
+
+#: users/templates/registration/password_reset_complete.html:9
+msgid "Восстановление пароля завершено!"
+msgstr "Password recovery complete!"
+
+#: users/templates/registration/password_reset_complete.html:12
+#: users/templates/registration/password_reset_form.html:16
+msgid "Вернуться назад"
+msgstr "Go back"
+
+#: users/templates/registration/password_reset_confirm.html:17
+msgid "Ссылка на смену пароля недействительна"
+msgstr "The link to change your password is invalid"
+
+#: users/templates/registration/password_reset_done.html:9
+msgid "Ссылка для восстановления пароля отправлена на ваш email ✉️"
+msgstr "A link to reset your password has been sent to your email ✉️"
+
+#: users/templates/registration/register.html:5
+#: users/templates/registration/register.html:8
+msgid "Регистрация"
+msgstr "Registration"
+
+#: users/templates/registration/register.html:15
+msgid "Уже есть аккаунт?"
+msgstr "Already have an account?"
+
 #: users/validators.py:10
 msgid "Логин может содержать только латинские буквы"
 msgstr "Login can contain only Latin letters"
-
-#: profile/templates/profile_update.html:7
-msgid "Редактирование профиля"
-msgstr "Edit profile"
-
-#: profile/templates/profile_update.html:11
-msgid "Сохранить"
-msgstr "Save"
-
-#: profile/templates/profile:46
-msgid "Статистика по задачам 🔬"
-msgstr "Task statistics 🔬"
-
-#: profile/forms.py:10
-msgid "Удалить текущее изображение"
-msgstr "Delete current image"
-
-#: profile/forms.py:33
-msgid "Фото профиля"
-msgstr "Profile photo"
-
-#: profile/forms.py:34
-msgid "Имя"
-msgstr "First name"
-
-#: profile/forms.py:35
-msgid "Фамилия"
-msgstr "Last name"
-
-#: profile/forms.py:36
-msgid "Профессия"
-msgstr "Profession"
-
-#: profile/forms.py:37
-msgid "Местоположение"
-msgstr "Location"
-
-#: profile/forms.py:37
-msgid "О себе"
-msgstr "About me"
-
-#: profile/forms.py:37
-msgid "Пол"
-msgstr "Gender"
-
-#: profile/forms.py:37
-msgid "Возраст"
-msgstr "Age"
-
-
-
