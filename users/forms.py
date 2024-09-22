@@ -1,6 +1,11 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    AuthenticationForm,
+    PasswordResetForm,
+    SetPasswordForm,
+)
 from django.utils.translation import gettext_lazy as _
 
 from users.validators import validate_no_cyrillic
@@ -11,25 +16,27 @@ User = get_user_model()
 class UserCreationForm(UserCreationForm):
     usable_password = None
 
+    base_widget_attrs = {"class": "form-control mb-2 mt-2"}
+
     email = forms.EmailField(
         label="Email",
         max_length=254,
         widget=forms.EmailInput(
             attrs={
+                **base_widget_attrs,
                 "autocomplete": "email",
-                "class": "form-control",
                 "placeholder": _("Введите email"),
             }
         ),
     )
 
     username = forms.CharField(
-        label="Логин",
+        label=_("Логин"),
         max_length=150,
         widget=forms.TextInput(
             attrs={
+                **base_widget_attrs,
                 "autocomplete": "username",
-                "class": "form-control",
                 "placeholder": _("Введите логин"),
             }
         ),
@@ -37,22 +44,22 @@ class UserCreationForm(UserCreationForm):
     )
 
     password1 = forms.CharField(
-        label="Пароль",
+        label=_("Пароль"),
         widget=forms.PasswordInput(
             attrs={
+                **base_widget_attrs,
                 "autocomplete": "new-password",
-                "class": "form-control",
                 "placeholder": _("Введите пароль"),
             }
         ),
     )
 
     password2 = forms.CharField(
-        label="Повторите пароль",
+        label=_("Повторите пароль"),
         widget=forms.PasswordInput(
             attrs={
+                **base_widget_attrs,
                 "autocomplete": "new-password",
-                "class": "form-control",
                 "placeholder": _("Подтвердите пароль"),
             }
         ),
@@ -61,3 +68,75 @@ class UserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ("username", "email")
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+
+    base_widget_attrs = {"class": "form-control mb-2 mt-2"}
+
+    username = forms.CharField(
+        label=_("Логин"),
+        widget=forms.TextInput(
+            attrs={
+                **base_widget_attrs,
+                "autocomplete": "username",
+                "placeholder": _("Введите логин"),
+            }
+        ),
+        validators=[validate_no_cyrillic],
+    )
+
+    password = forms.CharField(
+        label=_("Пароль"),
+        widget=forms.PasswordInput(
+            attrs={
+                **base_widget_attrs,
+                "autocomplete": "current-password",
+                "placeholder": _("Введите пароль"),
+            }
+        ),
+    )
+
+
+class CustomPasswordResetForm(PasswordResetForm):
+
+    base_widget_attrs = {"class": "form-control mb-2 mt-2"}
+
+    email = forms.EmailField(
+        label="Email",
+        max_length=254,
+        widget=forms.EmailInput(
+            attrs={
+                **base_widget_attrs,
+                "autocomplete": "email",
+                "placeholder": _("Введите email"),
+            }
+        ),
+    )
+
+
+class CustomSetPasswordForm(SetPasswordForm):
+
+    base_widget_attrs = {"class": "form-control mb-2 mt-2"}
+
+    new_password1 = forms.CharField(
+        label=_("Новый пароль"),
+        widget=forms.PasswordInput(
+            attrs={
+                **base_widget_attrs,
+                "autocomplete": "new-password",
+                "placeholder": _("Введите новый пароль"),
+            }
+        ),
+    )
+
+    new_password2 = forms.CharField(
+        label=_("Повторите новый пароль"),
+        widget=forms.PasswordInput(
+            attrs={
+                **base_widget_attrs,
+                "autocomplete": "new-password",
+                "placeholder": _("Подтвердите новый пароль"),
+            }
+        ),
+    )
