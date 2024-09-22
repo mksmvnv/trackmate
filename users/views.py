@@ -1,9 +1,19 @@
 from django.views import View
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.shortcuts import render, redirect
+from django.contrib.auth.views import (
+    LoginView,
+    PasswordResetView,
+    PasswordResetConfirmView,
+)
 
-from users.forms import UserCreationForm
+from users.forms import (
+    UserCreationForm,
+    CustomAuthenticationForm,
+    CustomPasswordResetForm,
+    CustomSetPasswordForm,
+)
 
 
 class RegisterView(View):
@@ -26,3 +36,30 @@ class RegisterView(View):
 
         context = {"form": form}
         return render(request, self.template_name, context)
+
+
+class CustomLoginView(LoginView):
+    """Login user"""
+
+    form_class = CustomAuthenticationForm
+    template_name = "registration/login.html"
+
+
+class CustomPasswordResetView(PasswordResetView):
+    """Reset user password"""
+
+    form_class = CustomPasswordResetForm
+    template_name = "registration/password_reset_form.html"
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    """Confirm reset user password"""
+
+    form_class = CustomSetPasswordForm
+    template_name = "registration/password_reset_confirm.html"
+
+    def get_context_data(self, **kwargs) -> dict:
+        context = super().get_context_data(**kwargs)
+        context["uid"] = self.kwargs["uidb64"]
+        context["token"] = self.kwargs["token"]
+        return context
