@@ -12,4 +12,4 @@ lint:
 
 run:
 	@echo "Starting server..."
-	python3 manage.py runserver
+	@python3 manage.py runserver
