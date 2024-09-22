@@ -10,7 +10,7 @@ class ProfileForm(forms.ModelForm):
         label=_("Удалить текущее изображение"),
         widget=forms.CheckboxInput(
             attrs={
-                "class": "form-check-input",
+                "class": "form-check-input mb-2 mt-2",
                 "style": "width: 20px; height: 20px;",
             }
         ),
@@ -18,6 +18,12 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
+
+        base_widget_attrs = {
+            "class": "form-control mb-2 mt-2",
+            "style": "width: 100%; height: 40px;",
+        }
+
         fields = [
             "image",
             "clear_image",
@@ -29,6 +35,7 @@ class ProfileForm(forms.ModelForm):
             "gender",
             "age",
         ]
+
         labels = {
             "image": _("Фото профиля"),
             "first_name": _("Имя"),
@@ -39,58 +46,52 @@ class ProfileForm(forms.ModelForm):
             "gender": _("Пол"),
             "age": _("Возраст"),
         }
+
         widgets = {
             "image": forms.FileInput(
                 attrs={
-                    "class": "form-control",
-                    "style": "width: 100%; height: 40px;",
+                    **base_widget_attrs,
                 }
             ),
             "first_name": forms.TextInput(
                 attrs={
-                    "class": "form-control",
-                    "style": "width: 100%; height: 40px;",
+                    **base_widget_attrs,
                     "placeholder": _("Введите имя"),
                 }
             ),
             "last_name": forms.TextInput(
                 attrs={
-                    "class": "form-control",
-                    "style": "width: 100%; height: 40px;",
+                    **base_widget_attrs,
                     "placeholder": _("Введите фамилию"),
                 }
             ),
             "profession": forms.TextInput(
                 attrs={
-                    "class": "form-control",
-                    "style": "width: 100%; height: 40px;",
+                    **base_widget_attrs,
                     "placeholder": _("Введите профессию"),
                 }
             ),
             "location": forms.TextInput(
                 attrs={
-                    "class": "form-control",
-                    "style": "width: 100%; height: 40px;",
+                    **base_widget_attrs,
                     "placeholder": _("Введите местоположение"),
                 }
             ),
             "bio": forms.Textarea(
                 attrs={
-                    "class": "form-control",
+                    "class": "form-control mb-2 mt-2",
                     "style": "width: 100%; height: 60px;",
                     "placeholder": _("О себе"),
                 }
             ),
             "gender": forms.Select(
                 attrs={
-                    "class": "form-control",
-                    "style": "width: 100%; height: 40px;",
+                    **base_widget_attrs,
                 }
             ),
             "age": forms.NumberInput(
                 attrs={
-                    "class": "form-control",
-                    "style": "width: 100%; height: 40px;",
+                    **base_widget_attrs,
                     "placeholder": _("Введите возраст"),
                 }
             ),
