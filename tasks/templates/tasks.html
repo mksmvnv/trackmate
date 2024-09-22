@@ -9,11 +9,11 @@
 {% block content %}
 <!--Task form-->
 <h1 class="text-center m-5">{% translate "Добавить задачу ✍️" %}</h1>
-<form method="post" action="{% url 'tasks' %}">
+<form action="{% url 'tasks' %}" method="post">
   {{ form.as_p }}
   {{ form.non_field_errors }}
   {% csrf_token %}
-  <button type="submit" class="btn btn-dark" id="submit-button">{% translate "Добавить" %}</button>
+  <button type="submit" class="btn btn-dark mt-3" id="submit-button">{% translate "Добавить" %}</button>
 </form>
 <!--Tasks list-->
 <h1 class="text-center m-5">{% translate "Список задач 📃" %}</h1>
