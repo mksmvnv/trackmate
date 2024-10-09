@@ -14,6 +14,23 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = "profile.html"
     login_url = reverse_lazy("login")
 
+    def get_context_data(self, **kwargs) -> dict:
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        total_tasks = user.tasks.count()
+        completed_tasks = user.tasks.filter(status=True).count()
+
+        if total_tasks > 0:
+            completion_percentage = int((completed_tasks / total_tasks) * 100)
+        else:
+            completion_percentage = 0
+
+        context['total_tasks'] = total_tasks
+        context['completed_tasks'] = completed_tasks
+        context['completion_percentage'] = completion_percentage
+
+        return context
+
 
 class UpdateProfileView(LoginRequiredMixin, UpdateView):
     """Update profile"""
