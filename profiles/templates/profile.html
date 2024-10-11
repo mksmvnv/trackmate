@@ -6,15 +6,21 @@
 
 {% block content %}
 <div id="user-id" data-user-id="{{ user.id }}"></div>
+
+<!-- Profile Image -->
 <div class="text-center m-5">
     <img src="{{ user.profile.image.url }}" alt="image" class="rounded-circle" width="150" height="150">
 </div>
+
+<!-- Profile Info -->
 <p class="text-center"><i>@{{ user.username }}</i></p>
 <div class="text-center">
     <div class="row justify-content-center">
         <div class="col-auto d-flex align-items-center mb-3">
             {% if user.profile.first_name or user.profile.last_name %}
                 <span><h1>{{ user.profile.first_name|default:'' }} {{ user.profile.last_name|default:'' }}</h1></span>
+            {% elif user.first_name or user.last_name %}
+                <span><h1>{{ user.first_name|default:'' }} {{ user.last_name|default:'' }}</h1></span>
             {% else %}
                 <span><h1>Unknown Mate</h1></span>
             {% endif %}
@@ -35,55 +41,63 @@
 {% if user.profile.bio %}
     <p class="text-center m-4">{{ user.profile.bio }}</p>
 {% endif %}
-<div class="text-center m-4">
-    <a href="#collapseToggle" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseToggle">
-        {% translate "Подробнее" %}
-    </a>
+<div class="text-center">
+    <p class="d-inline-flex gap-1">
+        <a data-bs-toggle="collapse" href="#collapseToggle" role="button" aria-expanded="false" aria-controls="collapseToggle">
+          {% translate "Подробнее" %}
+        </a>
+    </p>
 </div>
-<div class="collapse mt-3" id="collapseToggle">
-    {% if user.profile.age %}
-        <p class="text-center">{{ user.profile.age }} лет</p>
-    {% endif %}
+<div class="collapse" id="collapseToggle">
     {% if user.profile.gender %}
         {% if user.profile.gender == 'М' %}
-            <div class="d-flex justify-content-center m-2">
+            <div class="text-center m-2">
                 <i class="bi bi-gender-male"></i>
             </div>
         {% elif user.profile.gender == 'Ж' %}
-            <div class="d-flex justify-content-center m-2">
+            <div class="text-center m-2">
                 <i class="bi bi-gender-female"></i>
             </div>
         {% else %}
-            <div class="d-flex justify-content-center m-2">
+            <div class="text-center m-2">
                 <i class="bi bi-gender-ambiguous"></i>
             </div>
         {% endif %}
     {% endif %}
+    {% if user.profile.age %}
+        <p class="text-center m-2">{{ user.profile.age }} {% translate "лет" %}</p>
+    {% endif %}
     {% if user.profile.profession %}
-        <p class="text-center">{{ user.profile.profession }}</p>
+        <p class="text-center m-2">{{ user.profile.profession }}</p>
     {% endif %}
 </div>
-<h2 class="text-center m-5">{% translate "Статистика по задачам 🔬" %}</h2>
+<br>
+<br>
+
+<!-- Statistics -->
+<h2 class="text-center">{% translate "Статистика по задачам 🔬" %}</h2>
+<br>
+<br>
 <div class="text-center">
     {% if user.tasks.count %}
-    <table class="table table-borderless table-hover">
+    <table class="table table-borderless">
         <thead>
-          <tr class="d-flex justify-content-center">
-            <th class="col-3">Всего</th>
-            <th class="col-3">Выполнено</th>
-            <th class="col-3">Результат</th>
-          </tr>
+        <tr class="d-flex justify-content-center" >
+            <th class="col-3" style="font-weight: normal;">{% translate "Всего" %}</th>
+            <th class="col-3" style="font-weight: normal;">{% translate "Выполнено" %}</th>
+            <th class="col-3" style="font-weight: normal;">{% translate "Результат" %}, %</th>
+        </tr>
         </thead>
         <tbody>
-          <tr class="d-flex justify-content-center">
-            <th class="col-3"><p class="fs-3 m-3">{{ total_tasks }} шт</p></th>
-            <th class="col-3"><p class="fs-3 m-3">{{ completed_tasks }} шт</p></th>
-            <th class="col-3"><p class="fs-3 m-3">{{ completion_percentage }} %</p></th>
-          </tr>
+        <tr class="d-flex justify-content-center">
+            <th class="col-3"><p class="fs-3 m-2">{{ total_tasks }}</p></th>
+            <th class="col-3"><p class="fs-3 m-2">{{ completed_tasks }}</p></th>
+            <th class="col-3"><p class="fs-3 m-2">{{ completion_percentage }}</p></th>
+        </tr>
         </tbody>
-      </table>
+    </table>
     {% else %}
-        <p class="text-center">Пока задач нет</p>
+        <p class="text-center">{% translate "Пока задач нет" %}</p>
     {% endif %}
 </div>
 {% endblock %}
