@@ -25,9 +25,9 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         else:
             completion_percentage = 0
 
-        context['total_tasks'] = total_tasks
-        context['completed_tasks'] = completed_tasks
-        context['completion_percentage'] = completion_percentage
+        context["total_tasks"] = total_tasks
+        context["completed_tasks"] = completed_tasks
+        context["completion_percentage"] = completion_percentage
 
         return context
 
