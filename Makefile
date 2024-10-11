@@ -7,7 +7,7 @@ all: run lint
 
 run:
 	@echo "Running server..."
-	@poetry run python3 $(WORKDIR)/manage.py runserver 8001
+	@poetry run python3 $(WORKDIR)/manage.py runserver
 
 lint:
 	@echo "Linting..."
