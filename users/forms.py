@@ -43,6 +43,28 @@ class UserCreationForm(UserCreationForm):
         validators=[validate_no_cyrillic],
     )
 
+    first_name = forms.CharField(
+        label=_("Имя"),
+        max_length=150,
+        widget=forms.TextInput(
+            attrs={
+                **base_widget_attrs,
+                "placeholder": _("Введите имя"),
+            }
+        ),
+    )
+
+    last_name = forms.CharField(
+        label=_("Фамилия"),
+        max_length=150,
+        widget=forms.TextInput(
+            attrs={
+                **base_widget_attrs,
+                "placeholder": _("Введите фамилию"),
+            }
+        ),
+    )
+
     password1 = forms.CharField(
         label=_("Пароль"),
         widget=forms.PasswordInput(
@@ -67,7 +89,7 @@ class UserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ("username", "email")
+        fields = ("username", "first_name", "last_name", "email")
 
 
 class CustomAuthenticationForm(AuthenticationForm):
