@@ -8,7 +8,7 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
 )
 
-from users.forms import (
+from apps.users.forms import (
     UserCreationForm,
     CustomAuthenticationForm,
     CustomPasswordResetForm,

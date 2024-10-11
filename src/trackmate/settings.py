@@ -30,9 +30,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "tasks",
-    "users",
-    "profiles",
+    "apps.tasks",
+    "apps.users",
+    "apps.profiles",
 ]
 
 MIDDLEWARE = [
@@ -52,9 +52,9 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_DIR / "tasks" / "templates",
-            BASE_DIR / "users" / "templates",
-            BASE_DIR / "profiles" / "templates",
+            BASE_DIR / "apps" / "tasks" / "templates",
+            BASE_DIR / "apps" / "users" / "templates",
+            BASE_DIR / "apps" / "profiles" / "templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {

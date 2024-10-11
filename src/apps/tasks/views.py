@@ -16,8 +16,8 @@ from django.views.generic import (
     DeleteView,
 )
 
-from tasks.models import Task
-from tasks.forms import TaskForm
+from apps.tasks.models import Task
+from apps.tasks.forms import TaskForm
 
 
 class IndexView(TemplateView):

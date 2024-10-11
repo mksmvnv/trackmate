@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from profiles.models import Profile
+from apps.profiles.models import Profile
 
 
 class ProfileForm(forms.ModelForm):

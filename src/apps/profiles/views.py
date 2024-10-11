@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from profiles.models import Profile
-from profiles.forms import ProfileForm
+from apps.profiles.models import Profile
+from apps.profiles.forms import ProfileForm
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
