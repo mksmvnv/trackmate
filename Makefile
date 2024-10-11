@@ -1,15 +1,15 @@
-.PHONY: lint run
+.PHONY: all run lint
 
-WORKDIR = .
-FLAGS = --target-version py312
+WORKDIR=./
+POETRYFLAGS=--config pyproject.toml
 
-all: lint run
+all: run lint
+
+run:
+	@echo "Running server..."
+	@poetry run python3 manage.py runserver 8001
 
 lint:
 	@echo "Linting..."
-	@black $(WORKDIR) $(FLAGS)
-	@echo "Successfully linted!"
-
-run:
-	@echo "Starting server..."
-	@python3 manage.py runserver
+	@black $(WORKDIR) $(POETRYFLAGS)
+	@echo "Linting done!"
