@@ -10,11 +10,13 @@ from apps.profiles.utils import ImageGenerator, FilePathProcessor
 
 
 class Gender(enum.Enum):
+    Default = 0
     Male = 1
     Female = 2
     Other = 3
 
     __labels__ = {
+        0: _("Не указан"),
         1: _("Мужской"),
         2: _("Женский"),
         3: _("Другое"),
@@ -35,7 +37,7 @@ class Profile(models.Model):
     profession = models.CharField(max_length=128, blank=True, null=True)
     location = models.CharField(max_length=128, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
-    gender = enum.EnumField(Gender, default=Gender.Other)
+    gender = enum.EnumField(Gender, default=Gender.Default)
     age = models.IntegerField(blank=True, null=True)
 
     class Meta:
