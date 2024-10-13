@@ -4,16 +4,24 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
+from django_enumfield import enum
+
 from apps.profiles.utils import ImageGenerator, FilePathProcessor
 
 
-class Profile(models.Model):
-    GENDER_CHOICES = [
-        (_("М"), _("Мужской")),
-        (_("Ж"), _("Женский")),
-        (_("Д"), _("Другое")),
-    ]
+class Gender(enum.Enum):
+    Male = 1
+    Female = 2
+    Other = 3
 
+    __labels__ = {
+        1: _("Мужской"),
+        2: _("Женский"),
+        3: _("Другое"),
+    }
+
+
+class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE
     )
@@ -27,9 +35,7 @@ class Profile(models.Model):
     profession = models.CharField(max_length=128, blank=True, null=True)
     location = models.CharField(max_length=128, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
-    gender = models.CharField(
-        max_length=1, choices=GENDER_CHOICES, blank=True, null=True
-    )
+    gender = enum.EnumField(Gender, default=Gender.Other)
     age = models.IntegerField(blank=True, null=True)
 
     class Meta:
