@@ -2,6 +2,21 @@ from django.db import models
 from django.utils.timezone import now
 
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+
+from django_enumfield import enum
+
+
+class Priority(enum.Enum):
+    Low = 1
+    Normal = 2
+    High = 3
+
+    __labels__ = {
+        1: _("Низкий"),
+        2: _("Нормальный"),
+        3: _("Высокий"),
+    }
 
 
 class Task(models.Model):
@@ -9,6 +24,8 @@ class Task(models.Model):
     description = models.TextField(max_length=2056, null=True, blank=True)
     status = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=now)
+    completed_by = models.DateTimeField(default=now)
+    priority = enum.EnumField(Priority, default=Priority.Normal)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="tasks"
     )
