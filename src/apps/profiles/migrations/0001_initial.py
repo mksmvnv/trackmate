@@ -7,6 +7,7 @@ from django.conf import settings
 
 import apps.profiles.utils
 
+
 class Migration(migrations.Migration):
 
     initial = True
@@ -33,7 +34,9 @@ class Migration(migrations.Migration):
                     models.ImageField(
                         blank=True,
                         null=True,
-                        upload_to=apps.profiles.utils.FilePathProcessor("profile_images/"),
+                        upload_to=apps.profiles.utils.FilePathProcessor(
+                            "profile_images/"
+                        ),
                     ),
                 ),
                 ("first_name", models.CharField(blank=True, max_length=128, null=True)),
