@@ -8,11 +8,13 @@ from django_enumfield import enum
 
 
 class Priority(enum.Enum):
+    Default = 0
     Low = 1
     Normal = 2
     High = 3
 
     __labels__ = {
+        0: _("Не указан"),
         1: _("Низкий"),
         2: _("Нормальный"),
         3: _("Высокий"),
@@ -25,7 +27,7 @@ class Task(models.Model):
     status = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=now)
     completed_by = models.DateTimeField(default=now)
-    priority = enum.EnumField(Priority, default=Priority.Normal)
+    priority = enum.EnumField(Priority, default=Priority.Default)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="tasks"
     )
