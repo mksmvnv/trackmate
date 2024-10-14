@@ -13,7 +13,7 @@
   {{ form.as_p }}
   {{ form.non_field_errors }}
   {% csrf_token %}
-  <button type="submit" class="btn btn-dark mt-3" id="submit-button">{% translate "Добавить" %}</button>
+  <button type="submit" class="btn-purple-2" id="submit-button">{% translate "Добавить" %}</button>
 </form>
 <!--Tasks list-->
 <h1 class="text-center m-5">{% translate "Список задач 📃" %}</h1>
@@ -42,12 +42,12 @@
         </div>
       </td>
       <td>
-        <a href="{% url 'task-update' task.id %}" class="btn btn-warning d-inline"><i class="bi bi-pencil-square"></i></a>
+        <a href="{% url 'task-update' task.id %}" class="btn btn-warning"><i class="bi bi-arrow-repeat"></i></a>
         <form action="{% url 'task-delete' task.id %}" method="post" class="d-inline">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
         </form>
-    </td>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
@@ -55,26 +55,24 @@
 <!-- Pagination controls -->
 <div class="mt-5">
   <nav aria-label="Pagination">
-    <ul class="pagination justify-content-center">
+    <ul class="pagination-purple">
       {% if page_obj.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+        <li>
+          <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
             <span aria-hidden="true"><</span>
           </a>
         </li>
       {% endif %}
       {% for num in page_obj.paginator.page_range %}
         {% if page_obj.number == num %}
-          <li class="page-item active" aria-current="page">
-            <span class="page-link">{{ num }}</span>
-          </li>
+          <li><a class="active">{{ num }}</a></li>
         {% else %}
-          <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+          <li><a href="?page={{ num }}">{{ num }}</a></li>
         {% endif %}
       {% endfor %}
       {% if page_obj.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+        <li>
+          <a href="?page={{ page_obj.next_page_number }}" aria-label="Next">
             <span aria-hidden="true">></span>
           </a>
         </li>

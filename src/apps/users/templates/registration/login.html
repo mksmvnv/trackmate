@@ -10,10 +10,10 @@
     {{ form.as_p }}
     {{ form.non_field_errors }}
     {% csrf_token %}
-    <button type="submit" class="btn btn-success mt-3">{% translate "Войти" %}</button>
+    <button type="submit" class="btn-purple-2">{% translate "Войти" %}</button>
 </form>
-<p class="mt-5">{% translate "Забыли пароль?" %} <a href="{% url 'password_reset' %}">{% translate "Восстановить пароль" %}</a></p>
-<p class="mt-2">{% translate "Ещё нет аккаунта?" %} <a href="{% url 'register' %}">{% translate "Зарегистрироваться" %}</a></p>
+<p class="mt-4">{% translate "Забыли пароль?" %} <a href="{% url 'password_reset' %}" style="color: #9B82F7; text-decoration: none">{% translate "Восстановить пароль" %}</a></p>
+<p class="mt-2">{% translate "Ещё нет аккаунта?" %} <a href="{% url 'register' %}" style="color: #9B82F7; text-decoration: none">{% translate "Зарегистрироваться" %}</a></p>
 {% endblock %}
 
 {% block scripts %}

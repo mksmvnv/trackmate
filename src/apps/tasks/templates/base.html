@@ -29,12 +29,19 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" href="{% url 'tasks' %}" id="navbar-tasks">{% translate "Задачи" %}</a>
-          <a class="nav-link" href="#" id="navbar-activity">{% translate "Активность" %}</a>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tasks' %}" id="navbar-tasks">{% translate "Задачи" %}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="navbar-activity">{% translate "Активность" %}</a>
+          </li>
           {% if user.is_authenticated %}
-            <a class="nav-link" href="{% url 'profile' user.id %}" id="navbar-profile">{% translate "Профиль" %}</a>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' user.id %}" id="navbar-profile">{% translate "Профиль" %}</a>
+            </li>
           {% endif %}
         </div>
+
         <div class="navbar-collapse collapse">
           <div class="navbar-nav ms-auto">
             <form action="{% url 'set-language' %}" method="post">

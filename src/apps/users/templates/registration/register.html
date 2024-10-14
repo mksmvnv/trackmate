@@ -10,9 +10,9 @@
     {{ form.as_p }}
     {{ form.non_field_errors }}
     {% csrf_token %}
-    <button type="submit" class="btn btn-success mt-3">{% translate "Зарегистрироваться" %}</button>
+    <button type="submit" class="btn-purple-2">{% translate "Зарегистрироваться" %}</button>
 </form>
-<p class="mt-5">{% translate "Уже есть аккаунт?" %} <a href="{% url 'login' %}">{% translate "Авторизоваться" %}</a></p>
+<p class="mt-4">{% translate "Уже есть аккаунт?" %} <a href="{% url 'login' %}" style="color: #9B82F7; text-decoration: none">{% translate "Авторизоваться" %}</a></p>
 {% endblock %}
 
 {% block scripts %}

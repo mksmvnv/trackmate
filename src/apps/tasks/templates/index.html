@@ -10,22 +10,22 @@ trackmate
 <div style="margin-top: 200px;">
   {% if user.is_authenticated %}
   <h1 class="text-center m-5">
-    {% translate "Хеллоу" %}, <span class="text-danger">{{ user.username }}</span>! {% translate "Добро пожаловать в " %}
-    <span class="text-danger">trackmate</span> 👋
+    {% translate "Хеллоу" %}, <span style="color: #9B82F7;">{{ user.username }}</span>! {% translate "Добро пожаловать в " %}
+    <span style="color: #9B82F7;">trackmate</span> 👋
   </h1>
   <h5 class="text-center" style="line-height: 1.5em;">
     {% translate "Это приложение для постановки задач. Тут можно управлять своим временем, отслеживать активность не только в течение дня, но и за весь период! Погнали!" %}
   </h5>
   <div class="text-center">
     <a href="{% url 'tasks' %}">
-      <button class="btn btn-success btn-lg m-5">{% translate "Перейти к задачам" %}</button>
+      <button class="btn-purple">{% translate "К задачам" %}</button>
     </a>
   </div>
   {% else %}
   <h1 class="text-center m-5">
     {% translate "Хеллоу, незнакомец!" %}
     <br>
-    {% translate "Добро пожаловать в " %}<span class="text-danger">trackmate</span> 👋
+    {% translate "Добро пожаловать в " %}<span style="color: #9B82F7;">trackmate</span> 👋
   </h1>
   <h5 class="text-center" style="line-height: 1.5em;">
     {% translate "Это приложение для постановки задач. Тут можно управлять своим временем, отслеживать активность не только в течение дня, но и за весь период!" %}
@@ -33,7 +33,7 @@ trackmate
   </h5>
   <div class="text-center">
     <a href="{% url 'login' %}">
-      <button class="btn btn-danger btn-lg m-5">{% translate "Авторизоваться" %}</button>
+      <button class="btn-purple">{% translate "Авторизоваться" %}</button>
     </a>
   </div>
   {% endif %}
