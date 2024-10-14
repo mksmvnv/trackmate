@@ -15,16 +15,6 @@ function setTheme(themeName) {
     } else {
         themeIcon.classList.replace('bi-moon', 'bi-brightness-high');
     }
-
-    // Change button
-
-    if (submitButton) {
-        if (themeName === 'dark') {
-            submitButton.classList.replace('btn-dark', 'btn-secondary');
-        } else {
-            submitButton.classList.replace('btn-secondary', 'btn-dark');
-        }
-    }
 }
 
 const savedTheme = localStorage.getItem('theme') || 'light';
