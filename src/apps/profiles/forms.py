@@ -10,7 +10,7 @@ class ProfileForm(forms.ModelForm):
         label=_("Удалить текущее изображение"),
         widget=forms.CheckboxInput(
             attrs={
-                "class": "form-check-input mb-2 mt-2",
+                "class": "form-check-input",
                 "style": "width: 20px; height: 20px;",
             }
         ),
