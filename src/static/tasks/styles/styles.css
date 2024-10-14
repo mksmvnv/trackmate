@@ -37,14 +37,89 @@ body {
     font-family: 'FiraCodeRegular', monospace !important;
 }
 
+/* Navbar */
+
 .text-logo {
     font-family: 'KodeMonoSemiBold', monospace !important;
 }
 
-/* Header */
+/* Main */
 
 main.container {
     flex-grow: 1;
+}
+
+/* Main button */
+
+.btn-purple {
+    margin-top: 40px;
+    width: 200px;
+    height: 60px;
+    font-size: 18px;
+    background-color: #9b82f7;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-purple:hover {
+    background-color: #846ed3;
+  }
+
+/* Second button */
+
+.btn-purple-2 {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #9b82f7;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-purple-2:hover {
+    background-color: #846ed3;
+  }
+
+/* Pagination */
+
+.pagination-purple {
+    display: inline-block;
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.pagination-purple li {
+    list-style: none;
+    display: inline;
+}
+
+.pagination-purple a {
+    color: #fff;
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 0 4px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.pagination-purple a.active {
+    background-color: #9b82f7;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination-purple a:hover:not(.active) {
+    background-color: #846ed3;
+    border-radius: 5px;
 }
 
 /* Footer */
