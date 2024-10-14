@@ -26,8 +26,8 @@ class Task(models.Model):
     description = models.TextField(max_length=2056, null=True, blank=True)
     status = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=now)
-    completed_by = models.DateTimeField(default=now)
     priority = enum.EnumField(Priority, default=Priority.Default)
+    completed_by = models.DateTimeField(default=now)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="tasks"
     )
