@@ -6,6 +6,9 @@
 
 {% block content %}
 <div id="user-id" data-user-id="{{ user.id }}"></div>
+<a href="{% url 'profile-update' user.id %}" style="color: #9B82F7; text-decoration: none">
+    <p class="text-end">{% translate "Редактировать профиль" %} <i class="bi bi-arrow-right"></i></p>
+</a>
 <!-- Profile Image -->
 <div class="text-center m-5">
     <img src="{{ user.profile.image.url }}" alt="image" class="rounded-circle" width="150" height="150">
@@ -22,9 +25,6 @@
             {% else %}
                 <span><h1>Unknown Mate</h1></span>
             {% endif %}
-            <a href="{% url 'profile-update' user.id %}" class="ms-3 text-light text-reset">
-                <i class="bi bi-pencil-square"></i>
-            </a>
         </div>
     </div>
 </div>
