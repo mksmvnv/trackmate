@@ -6,12 +6,6 @@
     font-weight: normal;
 }
 
-@font-face {
-    font-family: 'KodeMonoSemiBold';
-    src: url("/static/fonts/kode_mono/KodeMono-SemiBold.ttf") format('truetype');
-    font-weight: 600;
-}
-
 /* General */
 
 html, body {
@@ -35,12 +29,6 @@ body {
     flex-direction: column;
 
     font-family: 'FiraCodeRegular', monospace !important;
-}
-
-/* Navbar */
-
-.text-logo {
-    font-family: 'KodeMonoSemiBold', monospace !important;
 }
 
 /* Main */
@@ -102,18 +90,15 @@ main.container {
 }
 
 .pagination-purple a {
-    color: #fff;
     display: inline-block;
     padding: 8px 16px;
     text-decoration: none;
-    margin: 0 4px;
     transition: background-color 0.3s ease;
     border-radius: 5px;
 }
 
 .pagination-purple a.active {
     background-color: #9b82f7;
-    color: white;
     border-radius: 5px;
 }
 
