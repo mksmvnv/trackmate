@@ -24,6 +24,7 @@
       {% blocktranslate %}
       <th scope="col">Название</th>
       <th scope="col">Описание</th>
+      <th scope="col">Срок выполнения</th>
       <th scope="col">Статус</th>
       <th scope="col">Действия</th>
       {% endblocktranslate %}
@@ -35,6 +36,13 @@
       <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
       <td>{{ task.title }}</td>
       <td>{{ task.description }}</td>
+      <td>
+        {% if task.completed_by < now %}
+            <del>{{ task.completed_by|date:"d/m/Y H:i" }}</del>
+        {% else %}
+            {{ task.completed_by|date:"d/m/Y H:i" }}
+        {% endif %}
+    </td>
       <td>
         <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
           <input type="checkbox" class="btn-check" id="btncheck{{ task.id }}" autocomplete="off" data-id="{{ task.id }}" {% if task.status %}checked{% endif %}>
@@ -56,27 +64,27 @@
 <div class="mt-5">
   <nav aria-label="Pagination">
     <ul class="pagination-purple">
-      {% if page_obj.has_previous %}
-        <li>
-          <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-            <span aria-hidden="true"><</span>
-          </a>
-        </li>
-      {% endif %}
-      {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-          <li><a class="active">{{ num }}</a></li>
-        {% else %}
-          <li><a href="?page={{ num }}">{{ num }}</a></li>
+        {% if page_obj.has_previous %}
+            <li>
+                <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous" style="color: #fff;" class="theme-pagination">
+                    <span aria-hidden="true"><</span>
+                </a>
+            </li>
         {% endif %}
-      {% endfor %}
-      {% if page_obj.has_next %}
-        <li>
-          <a href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-            <span aria-hidden="true">></span>
-          </a>
-        </li>
-      {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li><a class="active" style="color: #fff;" class="theme-pagination">{{ num }}</a></li>
+            {% else %}
+                <li><a href="?page={{ num }}" style="color: #fff;" class="theme-pagination">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li>
+                <a href="?page={{ page_obj.next_page_number }}" style="color: #fff;" aria-label="Next" class="theme-pagination">
+                    <span aria-hidden="true">></span>
+                </a>
+            </li>
+        {% endif %}
     </ul>
   </nav>
 </div>
