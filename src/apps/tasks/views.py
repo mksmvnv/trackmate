@@ -2,6 +2,7 @@ from django.conf import settings
 from django.urls import reverse_lazy
 from django.utils import translation
 from django.shortcuts import redirect
+from django.utils.timezone import now
 from django.forms import BaseModelForm
 from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404
@@ -42,6 +43,7 @@ class CreateTaskListView(LoginRequiredMixin, CreateView, ListView):
     def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         context["form"] = self.get_form()
+        context['now'] = now() 
         return context
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
@@ -53,7 +55,7 @@ class CreateTaskListView(LoginRequiredMixin, CreateView, ListView):
         return self.render_to_response(context)
 
     def get_queryset(self) -> QuerySet:
-        return Task.objects.filter(user=self.request.user).order_by("created_at")
+        return Task.objects.filter(user=self.request.user).order_by("created_at").reverse()
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.instance.user = self.request.user
