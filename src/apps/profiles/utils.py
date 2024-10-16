@@ -35,7 +35,7 @@ class ImageGenerator:
         image = Image.new("RGB", image_size, color=self.background_color)
         draw = ImageDraw.Draw(image)
 
-        font_path = finders.find("fonts/kode_mono/KodeMono-SemiBold.ttf")
+        font_path = finders.find("fonts/fira_code/FiraCode-Bold.ttf")
 
         try:
             font = ImageFont.truetype(font_path, self.font_size)
@@ -46,7 +46,7 @@ class ImageGenerator:
         text_width = textbbox[2] - textbbox[0]
         text_height = textbbox[3] - textbbox[1]
 
-        vertical_offset = 90
+        vertical_offset = 110
         text_position = (
             (image_size[0] - text_width) / 2,
             (image_size[1] - text_height) / 2 - vertical_offset,
