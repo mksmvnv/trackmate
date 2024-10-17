@@ -67,6 +67,7 @@ class UserCreationForm(UserCreationForm):
 
     password1 = forms.CharField(
         label=_("Пароль"),
+        max_length=128,
         widget=forms.PasswordInput(
             attrs={
                 **base_widget_attrs,
@@ -78,6 +79,7 @@ class UserCreationForm(UserCreationForm):
 
     password2 = forms.CharField(
         label=_("Повторите пароль"),
+        max_length=128,
         widget=forms.PasswordInput(
             attrs={
                 **base_widget_attrs,
@@ -98,6 +100,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 
     username = forms.CharField(
         label=_("Логин"),
+        max_length=150,
         widget=forms.TextInput(
             attrs={
                 **base_widget_attrs,
@@ -110,6 +113,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 
     password = forms.CharField(
         label=_("Пароль"),
+        max_length=128,
         widget=forms.PasswordInput(
             attrs={
                 **base_widget_attrs,
@@ -143,6 +147,7 @@ class CustomSetPasswordForm(SetPasswordForm):
 
     new_password1 = forms.CharField(
         label=_("Новый пароль"),
+        max_length=128,
         widget=forms.PasswordInput(
             attrs={
                 **base_widget_attrs,
@@ -154,6 +159,7 @@ class CustomSetPasswordForm(SetPasswordForm):
 
     new_password2 = forms.CharField(
         label=_("Повторите новый пароль"),
+        max_length=128,
         widget=forms.PasswordInput(
             attrs={
                 **base_widget_attrs,

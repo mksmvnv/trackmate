@@ -38,7 +38,7 @@ class CreateTaskListView(LoginRequiredMixin, CreateView, ListView):
     success_url = reverse_lazy("tasks")
 
     def get_queryset(self) -> QuerySet:
-        return Task.objects.filter(user=self.request.user).order_by("created_at")
+        return Task.objects.filter(user=self.request.user).order_by("-created_at")
 
     def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
@@ -53,18 +53,6 @@ class CreateTaskListView(LoginRequiredMixin, CreateView, ListView):
     def form_invalid(self, form: BaseModelForm) -> HttpResponse:
         context = self.get_context_data(form=form)
         return self.render_to_response(context)
-
-    def get_queryset(self) -> QuerySet:
-        return (
-            Task.objects.filter(user=self.request.user).order_by("created_at").reverse()
-        )
-
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-    def form_invalid(self, form: BaseModelForm) -> HttpResponse:
-        return super().form_invalid(form)
 
 
 class UpdateTaskStatusView(LoginRequiredMixin, UpdateView):
