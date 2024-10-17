@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.utils.timezone import now
 
@@ -22,11 +24,12 @@ class Priority(enum.Enum):
 
 
 class Task(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=128)
     description = models.TextField(max_length=2056, null=True, blank=True)
     status = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=now)
-    priority = enum.EnumField(Priority, default=Priority.Default)
+    priority = enum.EnumField(enum=Priority, default=Priority.Default)
     completed_by = models.DateTimeField(default=now)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="tasks"
@@ -36,6 +39,7 @@ class Task(models.Model):
         db_table = "tasks"
         verbose_name = "task"
         verbose_name_plural = "tasks"
+        ordering = ["id"]
 
     def __str__(self):
         return (
