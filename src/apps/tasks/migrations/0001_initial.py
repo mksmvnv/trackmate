@@ -19,22 +19,48 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=128)),
-                ('description', models.TextField(blank=True, max_length=2056, null=True)),
-                ('status', models.BooleanField(default=False)),
-                ('created_at', models.DateTimeField(default=django.utils.timezone.now)),
-                ('priority', django_enumfield.db.fields.EnumField(default=0, enum=apps.tasks.models.Priority)),
-                ('completed_by', models.DateTimeField(default=django.utils.timezone.now)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tasks', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("title", models.CharField(max_length=128)),
+                (
+                    "description",
+                    models.TextField(blank=True, max_length=2056, null=True),
+                ),
+                ("status", models.BooleanField(default=False)),
+                ("created_at", models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    "priority",
+                    django_enumfield.db.fields.EnumField(
+                        default=0, enum=apps.tasks.models.Priority
+                    ),
+                ),
+                (
+                    "completed_by",
+                    models.DateTimeField(default=django.utils.timezone.now),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tasks",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'task',
-                'verbose_name_plural': 'tasks',
-                'db_table': 'tasks',
-                'ordering': ['id'],
+                "verbose_name": "task",
+                "verbose_name_plural": "tasks",
+                "db_table": "tasks",
+                "ordering": ["id"],
             },
         ),
     ]
