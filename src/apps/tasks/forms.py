@@ -1,5 +1,6 @@
+from datetime import datetime, timedelta
+
 from django import forms
-from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 from apps.tasks.models import Task
@@ -8,6 +9,7 @@ from apps.tasks.models import Task
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
+        next_year = datetime.now() + timedelta(days=365)
 
         base_widget_attrs = {
             "class": "form-control mb-2 mt-2",
@@ -46,6 +48,8 @@ class TaskForm(forms.ModelForm):
                     **base_widget_attrs,
                     "style": "width: 100%; height: 40px;",
                     "type": "datetime-local",
+                    "min": datetime.now().strftime("%Y-%m-%dT%H:%M"),
+                    "max": next_year.strftime("%Y-%m-%dT%H:%M"),
                 },
             ),
         }
