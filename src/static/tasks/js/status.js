@@ -17,7 +17,7 @@ $(document).ready(function() {
                     console.log('Status updated successfully');
                 }
             },
-            error: function(xhr, status, error) {
+            error: function(error) {
                 console.log('An error occurred:', error);
             }
         });
