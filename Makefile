@@ -1,6 +1,5 @@
 .PHONY: all run lint
-
-export $(shell sed 's/=.*//' .env)
+.SILENT: all run lint
 
 WORKDIR=./src
 POETRYFLAGS=--config pyproject.toml
@@ -8,10 +7,7 @@ POETRYFLAGS=--config pyproject.toml
 all: run lint
 
 run:
-	@echo "Running server..."
-	@poetry run python3 $(WORKDIR)/manage.py runserver $(DJANGO_HOST):$(DJANGO_PORT)
+	poetry run docker-compose -f docker-compose.yml up -d --build
 
 lint:
-	@echo "Linting..."
-	@black $(WORKDIR) $(POETRYFLAGS)
-	@echo "Linting done!"
+	poetry run black $(WORKDIR) $(POETRYFLAGS)
