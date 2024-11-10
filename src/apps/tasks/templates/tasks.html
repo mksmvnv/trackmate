@@ -25,6 +25,7 @@
       <th scope="col">Название</th>
       <th scope="col">Описание</th>
       <th scope="col">Срок выполнения</th>
+      <th scope="col">Приоритет</th>
       <th scope="col">Статус</th>
       <th scope="col">Действия</th>
       {% endblocktranslate %}
@@ -42,7 +43,8 @@
         {% else %}
             {{ task.completed_by|date:"d/m/Y H:i" }}
         {% endif %}
-    </td>
+      </td>
+      <td>{{ task.priority }}</td>
       <td>
         <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
           <input type="checkbox" class="btn-check" id="btncheck{{ task.id }}" autocomplete="off" data-id="{{ task.id }}" {% if task.status %}checked{% endif %}>
