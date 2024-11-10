@@ -6,7 +6,7 @@
 
 {% block content %}
 <a href="{% url 'profile' user.id %}" style="color: #9B82F7; text-decoration: none">
-    <p class="text-end">{% translate "Назад в профиль" %} <i class="bi bi-arrow-right"></i></p>
+    <p class="text-left"><i class="bi bi-arrow-left"></i> {% translate "Назад в профиль" %}</p>
 </a>
 <h1 class="text-center m-5">{% translate "Редактирование профиля" %}</h1>
 <form action="{% url 'profile-update' user.id %}" method="post" enctype="multipart/form-data">
