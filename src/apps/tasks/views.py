@@ -34,8 +34,8 @@ class CreateTaskListView(LoginRequiredMixin, CreateView, ListView):
     model = Task
     form_class = TaskForm
     login_url = reverse_lazy("login")
-    paginate_by = 5
     success_url = reverse_lazy("tasks")
+    paginate_by = 5
 
     def get_queryset(self) -> QuerySet:
         return Task.objects.filter(user=self.request.user).order_by("-created_at")
