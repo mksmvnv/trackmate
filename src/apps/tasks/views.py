@@ -1,7 +1,4 @@
-from django.conf import settings
 from django.urls import reverse_lazy
-from django.utils import translation
-from django.shortcuts import redirect
 from django.utils.timezone import now
 from django.forms import BaseModelForm
 from django.db.models.query import QuerySet
@@ -9,7 +6,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic import (
-    View,
     TemplateView,
     ListView,
     CreateView,
@@ -97,19 +93,3 @@ class DeleteTaskView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("tasks")
     login_url = reverse_lazy("login")
 
-
-class SetLanguageView(View):
-    """Set language"""
-
-    def post(self, request) -> HttpResponseRedirect:
-        lang_code = request.POST.get("language")
-
-        if lang_code and lang_code in dict(settings.LANGUAGES).keys():
-            request.session["django_language"] = lang_code
-            translation.activate(lang_code)
-
-        next_url = request.META.get("HTTP_REFERER", "/")
-
-        next_url = next_url.replace(f"/{request.LANGUAGE_CODE}/", f"/{lang_code}/")
-
-        return redirect(next_url)

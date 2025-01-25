@@ -1,34 +1,31 @@
 {% extends "base.html" %}
 {% load static %}
-{% load i18n %}
 
 {% block title %}
-{% translate "Задачи" %}
+Задачи
 {% endblock %}
 
 {% block content %}
 <!--Task form-->
-<h1 class="text-center m-5">{% translate "Добавить задачу ✍️" %}</h1>
+<h1 class="text-center m-5">Добавить задачу ✍️</h1>
 <form action="{% url 'tasks' %}" method="post">
   {{ form.as_p }}
   {{ form.non_field_errors }}
   {% csrf_token %}
-  <button type="submit" class="btn-purple-2" id="submit-button">{% translate "Добавить" %}</button>
+  <button type="submit" class="btn-purple-2" id="submit-button">Добавить</button>
 </form>
 <!--Tasks list-->
-<h1 class="text-center m-5">{% translate "Список задач 📃" %}</h1>
+<h1 class="text-center m-5">Список задач 📃</h1>
 <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
-      {% blocktranslate %}
       <th scope="col">Название</th>
       <th scope="col">Описание</th>
       <th scope="col">Срок выполнения</th>
       <th scope="col">Приоритет</th>
       <th scope="col">Статус</th>
       <th scope="col">Действия</th>
-      {% endblocktranslate %}
     </tr>
   </thead>
   <tbody>

@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load i18n %}
 
-{% block title %}{% translate "Профиль" %} - {{ user.username }}{% endblock %}
+{% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
 <div id="user-id" data-user-id="{{ user.id }}"></div>
 <a href="{% url 'profile-update' user.id %}" style="color: #9B82F7; text-decoration: none">
-    <p class="text-end">{% translate "Редактировать профиль" %} <i class="bi bi-arrow-right"></i></p>
+    <p class="text-end">Редактировать профиль <i class="bi bi-arrow-right"></i></p>
 </a>
 <!-- Profile Image -->
 <div class="text-center m-5">
@@ -42,7 +41,7 @@
 <div class="text-center">
     <p class="d-inline-flex gap-1">
         <a data-bs-toggle="collapse" href="#collapseToggle" role="button" aria-expanded="false" aria-controls="collapseToggle" style="color: #9B82F7; text-decoration: none">
-          {% translate "Подробнее" %}
+          Подробнее
         </a>
     </p>
 </div>
@@ -63,7 +62,7 @@
         {% endif %}
     {% endif %}
     {% if user.profile.age %}
-        <p class="text-center m-2">{{ user.profile.age }} {% translate "лет" %}</p>
+        <p class="text-center m-2">{{ user.profile.age }} лет</p>
     {% endif %}
     {% if user.profile.profession %}
         <p class="text-center m-2">{{ user.profile.profession }}</p>
@@ -72,7 +71,7 @@
 <br>
 <br>
 <!-- Statistics -->
-<h2 class="text-center">{% translate "Статистика по задачам 🔬" %}</h2>
+<h2 class="text-center">Статистика по задачам 🔬</h2>
 <br>
 <br>
 <div class="text-center">
@@ -80,9 +79,9 @@
     <table class="table table-borderless">
         <thead>
         <tr class="d-flex justify-content-center" >
-            <th class="col-3" style="font-weight: normal;">{% translate "Всего" %}</th>
-            <th class="col-3" style="font-weight: normal;">{% translate "Выполнено" %}</th>
-            <th class="col-3" style="font-weight: normal;">{% translate "Результат" %}, %</th>
+            <th class="col-3" style="font-weight: normal;">Всего</th>
+            <th class="col-3" style="font-weight: normal;">Выполнено</th>
+            <th class="col-3" style="font-weight: normal;">Результат, %</th>
         </tr>
         </thead>
         <tbody>
@@ -94,7 +93,7 @@
         </tbody>
     </table>
     {% else %}
-        <p class="text-center">{% translate "Пока задач нет" %}</p>
+        <p class="text-center">Пока задач нет</p>
     {% endif %}
 </div>
 {% endblock %}

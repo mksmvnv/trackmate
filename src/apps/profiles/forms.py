@@ -1,21 +1,9 @@
 from django import forms
-from django.utils.translation import gettext_lazy as _
 
 from apps.profiles.models import Profile
 
 
 class ProfileForm(forms.ModelForm):
-    clear_image = forms.BooleanField(
-        required=False,
-        label=_("Удалить текущее изображение"),
-        widget=forms.CheckboxInput(
-            attrs={
-                "class": "form-check-input",
-                "style": "width: 20px; height: 20px;",
-            }
-        ),
-    )
-
     class Meta:
         model = Profile
 
@@ -26,7 +14,6 @@ class ProfileForm(forms.ModelForm):
 
         fields = [
             "image",
-            "clear_image",
             "first_name",
             "last_name",
             "profession",
@@ -37,14 +24,14 @@ class ProfileForm(forms.ModelForm):
         ]
 
         labels = {
-            "image": _("Фото профиля"),
-            "first_name": _("Имя"),
-            "last_name": _("Фамилия"),
-            "profession": _("Профессия"),
-            "location": _("Местоположение"),
-            "bio": _("О себе"),
-            "gender": _("Пол"),
-            "age": _("Возраст"),
+            "image": "Фото профиля",
+            "first_name": "Имя",
+            "last_name": "Фамилия",
+            "profession": "Профессия",
+            "location": "Местоположение",
+            "bio": "О себе",
+            "gender": "Пол",
+            "age": "Возраст",
         }
 
         widgets = {
@@ -56,32 +43,32 @@ class ProfileForm(forms.ModelForm):
             "first_name": forms.TextInput(
                 attrs={
                     **base_widget_attrs,
-                    "placeholder": _("Введите имя"),
+                    "placeholder": "Введите имя",
                 }
             ),
             "last_name": forms.TextInput(
                 attrs={
                     **base_widget_attrs,
-                    "placeholder": _("Введите фамилию"),
+                    "placeholder": "Введите фамилию",
                 }
             ),
             "profession": forms.TextInput(
                 attrs={
                     **base_widget_attrs,
-                    "placeholder": _("Введите профессию"),
+                    "placeholder": "Введите профессию",
                 }
             ),
             "location": forms.TextInput(
                 attrs={
                     **base_widget_attrs,
-                    "placeholder": _("Введите местоположение"),
+                    "placeholder": "Введите местоположение",
                 }
             ),
             "bio": forms.Textarea(
                 attrs={
                     "class": "form-control mb-2 mt-2",
                     "style": "width: 100%; height: 60px;",
-                    "placeholder": _("О себе"),
+                    "placeholder": "О себе",
                 }
             ),
             "gender": forms.Select(
@@ -92,18 +79,10 @@ class ProfileForm(forms.ModelForm):
             "age": forms.NumberInput(
                 attrs={
                     **base_widget_attrs,
-                    "placeholder": _("Введите возраст"),
+                    "placeholder": "Введите возраст",
                 }
             ),
         }
 
-    def save(self, commit=True):
-        profile = super().save(commit=False)
 
-        if self.cleaned_data.get("clear_image"):
-            profile.image = f"profile_images/default/user_{profile.user.id}/default_profile_image_user_{profile.user.id}.png"
-
-        if commit:
-            profile.save()
-
-        return profile
+    

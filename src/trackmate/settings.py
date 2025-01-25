@@ -12,9 +12,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = True
+DEBUG = os.getenv("DEBUG").capitalize() == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
+
+ADMIN_URL = os.getenv("ADMIN_URL")
+
+IMGBB_API_KEY = os.getenv("IMGBB_API_KEY")
+IMGBB_UPLOAD_URL = os.getenv("IMGBB_UPLOAD_URL")
 
 AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = "/"
@@ -71,16 +76,25 @@ TEMPLATES = [
 WSGI_APPLICATION = "trackmate.wsgi.application"
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": os.getenv("POSTGRES_ENGINE"),
-        "NAME": os.getenv("POSTGRES_NAME"),
-        "USER": os.getenv("POSTGRES_USER"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        "HOST": os.getenv("POSTGRES_HOST"),
-        "PORT": os.getenv("POSTGRES_PORT"),
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": os.getenv("POSTGRES_ENGINE"),
+            "NAME": os.getenv("POSTGRES_NAME"),
+            "USER": os.getenv("POSTGRES_USER"),
+            "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+            "HOST": os.getenv("POSTGRES_HOST"),
+            "PORT": os.getenv("POSTGRES_PORT"),
+        }
+    }
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -112,14 +126,20 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-STATIC_URL = "static/"
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+if DEBUG:
+    # Local development
+    STATIC_URL = "static/"
+    STATICFILES_DIRS = [BASE_DIR / "static"]
+    STATIC_ROOT = None
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+else:
+    # Production
+    STATIC_URL = "src/static/"
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATICFILES_DIRS = []
+    MEDIA_URL = "src/media/"
+    MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, "locale"),

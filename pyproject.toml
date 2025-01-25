@@ -1,5 +1,5 @@
 [tool.black]
-target-version = ["py312"]
+target-version = ["py313"]
 
 [tool.poetry]
 name = "trackmate"
@@ -11,7 +11,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 pip = "^24.2"
-python = "^3.12"
+python = "^3.13"
 django = "^5.1"
 python-dotenv = "^1.0.1"
 pillow = "^10.4.0"

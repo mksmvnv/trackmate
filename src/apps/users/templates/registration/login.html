@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load i18n %}
 
-{% block title %}{% translate "Авторизация" %}{% endblock %}
+{% block title %}Авторизация{% endblock %}
 
 {% block content %}
-<h1 class="text-center m-5">{% translate "Авторизация" %}</h1>
+<h1 class="text-center m-5">Авторизация</h1>
 <form action="{% url 'login' %}" method="post">
     {{ form.as_p }}
     {{ form.non_field_errors }}
     {% csrf_token %}
-    <button type="submit" class="btn-purple-2">{% translate "Войти" %}</button>
+    <button type="submit" class="btn-purple-2">Войти</button>
 </form>
-<p class="mt-4">{% translate "Забыли пароль?" %} <a href="{% url 'password_reset' %}" style="color: #9B82F7; text-decoration: none">{% translate "Восстановить пароль" %}</a></p>
-<p class="mt-2">{% translate "Ещё нет аккаунта?" %} <a href="{% url 'register' %}" style="color: #9B82F7; text-decoration: none">{% translate "Зарегистрироваться" %}</a></p>
+<p class="mt-4">Забыли пароль? <a href="{% url 'password_reset' %}" style="color: #9B82F7; text-decoration: none">Восстановить пароль</a></p>
+<p class="mt-2">Ещё нет аккаунта? <a href="{% url 'register' %}" style="color: #9B82F7; text-decoration: none">Зарегистрироваться</a></p>
 {% endblock %}
 
 {% block scripts %}

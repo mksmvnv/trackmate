@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 
 from django import forms
-from django.utils.translation import gettext_lazy as _
 
 from apps.tasks.models import Task
 
@@ -17,24 +16,24 @@ class TaskForm(forms.ModelForm):
 
         fields = ["title", "description", "priority", "completed_by"]
         labels = {
-            "title": _("Название"),
-            "description": _("Описание"),
-            "priority": _("Приоритет"),
-            "completed_by": _("Выполнить до:"),
+            "title": "Название",
+            "description": "Описание",
+            "priority": "Приоритет",
+            "completed_by": "Выполнить до:",
         }
         widgets = {
             "title": forms.TextInput(
                 attrs={
                     **base_widget_attrs,
                     "style": "width: 100%; height: 40px;",
-                    "placeholder": _("Введите название задачи"),
+                    "placeholder": "Введите название задачи",
                 }
             ),
             "description": forms.Textarea(
                 attrs={
                     **base_widget_attrs,
                     "style": "width: 100%; height: 60px;",
-                    "placeholder": _("Введите описание задачи"),
+                    "placeholder": "Введите описание задачи",
                 }
             ),
             "priority": forms.Select(

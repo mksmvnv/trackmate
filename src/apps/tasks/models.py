@@ -4,7 +4,6 @@ from django.db import models
 from django.utils.timezone import now
 
 from django.conf import settings
-from django.utils.translation import gettext_lazy as _
 
 from django_enumfield import enum
 
@@ -15,9 +14,9 @@ class Priority(enum.Enum):
     High = 3
 
     __labels__ = {
-        1: _("Низкий"),
-        2: _("Обычный"),
-        3: _("Высокий"),
+        1: "Низкий",
+        2: "Обычный",
+        3: "Высокий",
     }
 
 

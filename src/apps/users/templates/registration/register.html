@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load i18n %}
 
-{% block title %}{% translate "Регистрация" %}{% endblock %}
+{% block title %}Регистрация{% endblock %}
 
 {% block content %}
-<h1 class="text-center m-5">{% translate "Регистрация" %}</h1>
+<h1 class="text-center m-5">Регистрация</h1>
 <form action="{% url 'register' %}" method="post">
     {{ form.as_p }}
     {{ form.non_field_errors }}
     {% csrf_token %}
-    <button type="submit" class="btn-purple-2">{% translate "Зарегистрироваться" %}</button>
+    <button type="submit" class="btn-purple-2">Зарегистрироваться</button>
 </form>
-<p class="mt-4">{% translate "Уже есть аккаунт?" %} <a href="{% url 'login' %}" style="color: #9B82F7; text-decoration: none">{% translate "Авторизоваться" %}</a></p>
+<p class="mt-4">Уже есть аккаунт? <a href="{% url 'login' %}" style="color: #9B82F7; text-decoration: none">Авторизоваться</a></p>
 {% endblock %}
 
 {% block scripts %}

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-{% load i18n %}
 <html lang="en" id="html-theme">
 <head>
   <meta charset="UTF-8">
@@ -32,26 +31,19 @@
             <a class="nav-link active me-3" href="{% url 'index' %}"><b>trackmate</b></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'tasks' %}" id="navbar-tasks">{% translate "Задачи" %}</a>
+            <a class="nav-link" href="{% url 'tasks' %}" id="navbar-tasks">Задачи</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" id="navbar-activity">{% translate "Активность" %}</a>
+            <a class="nav-link" href="#" id="navbar-activity">Активность</a>
           </li>
           {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'profile' user.id %}" id="navbar-profile">{% translate "Профиль" %}</a>
+              <a class="nav-link" href="{% url 'profile' user.id %}" id="navbar-profile">Профиль</a>
             </li>
           {% endif %}
         </div>
 
         <div class="navbar-collapse collapse">
-          <div class="navbar-nav ms-auto">
-            <form action="{% url 'set-language' %}" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="language" value="{% if request.LANGUAGE_CODE == 'ru' %}en{% else %}ru{% endif %}">
-                <button class="nav-link" type="submit"><i class="bi bi-translate"></i></button>
-            </form>
-          </div>
           <div class="navbar-nav">
             <span class="nav-link" id="theme-toggle" style="cursor: pointer;">
               <i class="bi bi-brightness-high" id="theme-icon"></i>
